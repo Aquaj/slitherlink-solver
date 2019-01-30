@@ -1,0 +1,58 @@
+Affichage :
+
+L'affichage se fera sur le terminal avec des caracteres ASCII. Voici deux affichages differents, un plus simple mais moins joli, et un plus jolie mais un peu plus compliqué. Les caracteres utilises ainsi que leur code ASCII sont fournit :
+
+Affichage simple :
+╔═════╗
+║┌───┐║
+║│2 3│║
+║│ ┌─┘║
+║│×│2 ║
+║└─┘  ║
+╚═════╝
+
+Affichage moins simple :
+╔═════════╗
+║┌───────┐║
+║│ 2 ¦ 3 │║
+║│---┌───┘║
+║│ × │ 2  ║
+║└───┘    ║
+╚═════════╝
+
+Remplissage des cases :
+- × = 158
+
+- 0 = 48
+
+- 1 = 49
+
+- 2 = 50
+
+- 3 = 51
+	
+Bords de la grille :
+- ╔ = 201
+
+- ╚ = 200
+
+- ╝ = 188
+
+- ╗ = 187
+
+- ║ = 186
+
+- ═ = 205
+
+Bords de la courbe :
+- ┌ = 218
+
+- └ = 192
+
+- ┘ = 217
+
+- ┐ = 191
+
+- │ = 179
+
+- ─ = 196
