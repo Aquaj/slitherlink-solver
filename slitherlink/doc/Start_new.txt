@@ -1,0 +1,10 @@
+Générateur:
+  - Principe : Générer un cercle, assez centré dans le cas d'une grille rectangulaire,  qui prend la totalité de la taille de la grille. On utilise un algo (à détailler) qui décide comment modifier le cercle (bosse, creux, chemins, etc.). On ajoute les nombres après la génération du cercle, et on en enlève au hasard. (penser aux cas 1x1, 1xM)
+  - Cas unique : Utilisation d'une heuristique pour enlever les élements trop simples (3 dans les coins, les 0, etc.) Utilisation du solveur : pour tous les chiffres, en enlever un, utiliser le solveur pour bvérifier l'unicité de la solution, si c'est unique on passe à un autre chiffre, si non on remet le chiffre dans la grille puis on passe à un autre chiffre.
+  A creuser : peut être que l'ordre de sélection/suppression des chiffres est important ? à vérifier.
+
+Tests : Gérer les cas speciaux ou difficiles en faisant attention au temps d'execution et à l'efficacité du code, ainsi qu'écarter d'hypothetiques erreurs:
+  - (unitaire) chevauchement = vérifier l'absence de croisements
+  - (unitaire) vérifier la modulabilité
+  - (unitaire) vérifier la validité des cases (pas autre chose que vide, 0, 1, 2 ou 3)
+  - (performs) calculer et comparer le temps d'executions des différents algorithme (entre solution unique et solution pas unique)
