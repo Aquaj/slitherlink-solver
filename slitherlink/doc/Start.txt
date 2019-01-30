@@ -16,17 +16,21 @@ Projets deja existants :
 
 Besoins fonctionnels : 
 
-	- Trouver une solution de la grille si possible.	
-	- Trouver les solutions possibles pour un nombre de contraintes precis. 
+	- Trouver une solution de la grille si possible:
+		- Heuristique (faire un cercle grand, assez centré dans le cas d'un rectangle, puis ajouter tous les chiffres autours, et ensuite enlever des chiffres)
+	- Generer une grille a solution unique :
+		- Comme precedement, enlever des chiffres, sauf qu'on verifie avec le solveur, si la grille peut avoir d'autres solutions, on reviens en arrière et on essaye un autre chiffre. 
 	- Generer une grille SlitherLink de taille modulable.
-	- Gerer une grille SlitherLink a solution unique.
-	- Afficher la solution
+	- Trouver les solutions possibles pour un nombre de contraites precis.
+	- Afficher la solution:
+		- Affichage ASCII sur le terminal
 
 Besoins non fonctionnels :
 	
 	- Analyse d'efficacite des differentes approches implementees
 	- Fournir un corpus de grilles
-	- Fournir des tests ??
+	- Fournir des tests:
+		- Cas spéciaux (petites grilles, grille en 1xM, grille en 1x1)
 
 
 Bibliographie :
