@@ -1,0 +1,39 @@
+Description du projet : Le projet consiste a concevoir un programme qui peut resoudre et generer des grilles du jeu Slitherlink. Slitherlink (aussi connu sous le nom de Fences (clotures), Loop the Loop (boucler la boucle) ou Dotty Dilemma (dilemme des points)) est un jeu de logique. Ce jeu se joue sur un plateau rectangulaire forme de points. Entre chaque point peut se trouver des chiffres (entre 0 et 3) ou rien. L'objectif est de relier horizontalement ou verticalement (et non diagonalement) les points adjacents afin de faire une boucle. Le chiffre sur chaque case designe le nombre de trait entourant la case. Par exemple, une case 3 doit utiliser exactement 3 de ses cotes pour former la ligne. Dans le cas d'une case vide, le joueur est libre d'utiliser autant de cotes de la case qu'il veut.
+
+
+
+Projets deja existants :
+
+	- Slitherlink comps Project : C'est un projet d'etudiants consistant a creer un solveur pour le jeu Slitherlink ainsi qu'un generateur de grilles de taille modulables,  de difficultes differentes avec une solution unique. Comme la resolution d'un puzzle Slitherlink est un probleme NP-difficile, le projet se concentre sur la generation et la vitesse de resolution de puzzle. 
+
+	http://cs.carleton.edu/cs_comps/1516/slither/final-results/index.html
+
+
+	- Slitherlink, minisat and emscripten : Ce projet est une demonstration utilisant le solveur minisat SAT pour resoudre les puzzles Slitherlink dans un navigateur web. Ils generent une version de code javascript de minisat en utilisant emscripten. Le solveur est ecrit en javascript et tourne sur le navigateur, et n'est donc pas resolu par un serveur quelconque.
+
+	http://www.dougandjean.com/slither/index.html
+	
+
+Besoins fonctionnels : 
+
+	- Trouver une solution de la grille si possible.	
+	- Trouver les solutions possibles pour un nombre de contraintes precis. 
+	- Generer une grille SlitherLink de taille modulable.
+	- Gerer une grille SlitherLink a solution unique.
+	- Afficher la solution
+
+Besoins non fonctionnels :
+	
+	- Analyse d'efficacite des differentes approches implementees
+	- Fournir un corpus de grilles
+	- Fournir des tests ??
+
+
+Bibliographie :
+
+	1- solving the slitherlink problem
+	2- a rule-based approach to the puzzle of slitherlink 
+	3- COMPLEXITY AND COMPLETENESS OF FINDING ANOTHER SOLUTION AND ITS APPLICATION TO PUZZLES
+	4- Finding All Solutions and Instances of Numberlink and Slitherlink by ZDDs
+	5- An algorithm for automatic generation of the Slither Link problems ???
+
