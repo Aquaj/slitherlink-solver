@@ -20,7 +20,6 @@ struct hashtable_s {
 
 typedef struct hashtable_s hashtable_t;
 
-
 /* Create a new hashtable. */
 hashtable_t *ht_create( int size ) {
 
