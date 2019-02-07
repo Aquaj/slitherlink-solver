@@ -1,4 +1,4 @@
-#CC=gcc
+CC=gcc
 #CFLAGS=
 #DEPS=
 #%.o: %.c $(DEPS)
@@ -6,5 +6,8 @@
 #
 #
 #.PHONY: clean
-#clean:
+
+#all: 
+
+clean:
 	rm-f 
