@@ -24,8 +24,10 @@ int main(int argc, char * argv[])
 
 
   //affichage du jeu
-
-
+  printf("║│");
+  for(int i = 0; i<N-4; ++i)
+    printf(" ");
+  printf("│║\n");
 
 
 
