@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define M 10
-#define N 10
+#define M 34
+#define N 21
 
 
 
@@ -26,8 +26,8 @@ int main(int argc, char * argv[])
   //affichage du jeu
   for(int j = 0 ; j<N ; ++j){
     printf("║│");
-    for(int i = 0; i<N; ++i)
-      printf("%d", j);
+    for(int i = 0; i<M; ++i)
+      printf(" ");
     printf("│║\n");
   }
 
