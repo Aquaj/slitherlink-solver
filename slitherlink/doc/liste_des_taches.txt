@@ -1,0 +1,47 @@
+Liste des choses à faire pour l'affichage :
+- afficher liste des grilles disponibles
+- afficher le temps de résolution
+- régler le soucis des caractères spéciaux qui fonctionnent quand on les
+  met en dur dans le code mais qui ne fonctionnent pas quand on les met
+  en code ASCII
+- faire un if qui affiche un espace si l'edge est vide et qui affiche une barre si l'edge est pleine
+- factoriser le code
+- nettoyer le code
+- finir generate_grid et generate unique
+- faire en sorte que si on se trompe dans la syntaxe des options, il faut que ça affiche l'aide
+- comprendre pourquoi le terminal semi-plante quand j'affiche l'aide (obligé.e.s de faire CTRL+C pour écrire à nouveau)
+(peut-être un problème de buffer ? penser à changer les printf en quelque chose de plus propre)
+
+A CHANGER :
+- -u est une option de -g
+-
+
+
+pas important :
+- mettre un meilleur affichage
+- user input
+- petit message plus agréable
+- possibilité de
+
+taches imposées par le prof :
+
+ -g[NxM],--generate[=NxM] generate a grid of size NxM (default:8x8)
+ -o FILE,--output FILE    write result to FILE
+ -v,--verbose             verbose output
+
+Le logiciel devra s'interrompre en revoyant un code EXIT_FAILURE en
+cas d'erreur ou renvoyer un code EXIT_SUCCESS si tout s'est déroulé
+normalement.
+
+Notez que le mode 'verbose' devra renseigner l'utilisateur sur les
+différentes étapes internes de la résolution ou de la génération des
+grilles et donner quelques statistiques.
+
+
+
+
+
+Rapport :
+- on a divisé les options en différente fonction
+- on distingue les fonctions grace à strcmp
+- pour les options de génération, on parse la chaine de caractère pour récupérer les valeur de N et de M
