@@ -8,6 +8,7 @@
 
 //METTRE UN GENERATEUR AU PIF POUR TESTER
 
+//la variable verbose sert à déterminer si on utilise verbose ou pas
 //option -h
 //show the help section
 void show_help(){
@@ -25,19 +26,19 @@ void show_help(){
 
 //option -g[NxM],--generate[=NxM]
 //generate a grid of size NxM (default:8x8)
-void generate_grid(){
+void generate_grid(int verbose){
   //TODO
 }
 
 // option -a,--all
 // search for all possible solutions
-void search_all_possible_solutions(){
+void search_all_possible_solutions(int verbose){
   //TODO
 }
 
 // option -u,--unique
 // generate a grid with unique solution
-void generate_grid_unique(){
+void generate_grid_unique(int verbose){
   //TODO
 }
 
@@ -60,6 +61,13 @@ void show_version(){
 
 int main(int argc, char ** argv)
 {
+  int verbose = 0;
+
+  for(int i = 0; i<argc;++i){
+    if(!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")){
+      verbose = 1;
+    }
+
   if(argc==1 || !strcmp(argv[1], "-h")){
     show_help();
     return EXIT_SUCCESS;
@@ -73,19 +81,21 @@ int main(int argc, char ** argv)
     char short_option = argv[1][1];
     char long_option = argv[1][2];
     if(short_option == 'g' || (short_option == '-' && long_option == 'g')){
-      generate_grid();
+      generate_grid(verbose);
       return EXIT_SUCCESS;
     }
 
     if(!strcmp(argv[1], "-a") || !strcmp(argv[1], "--all")){
-      search_all_possible_solutions();
+      search_all_possible_solutions(verbose);
       return EXIT_SUCCESS;
     }
 
     if(!strcmp(argv[1], "-u") || !strcmp(argv[1], "--unique")){
-      generate_grid_unique();
-      printf("cc");
+      generate_grid_unique(verbose);
       return EXIT_SUCCESS;
+    }
+
+
     }
 
   }
