@@ -1,5 +1,5 @@
-#ifndef H_PILE
-#define H_PILE
+#ifndef ___pile_h___
+#define ___pile_h___
 
 
 struct stack
