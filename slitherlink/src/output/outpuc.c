@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define M 10
 #define N 10
+#define VERSION 0.1
 
 //METTRE UN GENERATEUR AU PIF POUR TESTER
 
@@ -20,17 +22,50 @@ void show_help(){
   printf(" -h,--help                display this help\n\n");
 }
 
-void generate_grid(int NN, int MM){
-  printf("to do\n");
+//option -g[NxM],--generate[=NxM]
+//generate a grid of size NxM (default:8x8)
+void generate_grid(int NN, int MM, bool unique){
+  //TODO
 }
+
+// option -a,--all
+// search for all possible solutions
+void search_all_possible_solutions(){
+  //TODO
+}
+
+// option -u,--unique
+// generate a grid with unique solution
+void generate_grid_unique(){
+  //TODO
+}
+
+// option -o FILE,--output FILE
+// write result to FILE
+void write_result_to_file(){
+  //TODO
+}
+// option -v,--verbose
+// verbose output
+void verbose_output(){
+  //TODO
+}
+
+void show_version(){
+  printf("Version : %f\n", VERSION);
+}
+
+
 
 int main(int argc, char ** argv)
 {
 
   for(int i=0; i<argc; ++i){
-    if(strcmp (argv[i], "-h")){
-      show_help();
-    }
+    if(!strcmp(argv[i], "-h")) show_help();
+
+ if(!strcmp(argv[i], "-V") || !strcmp(argv[i], "--version")){
+   show_version();
+   }
   }
 
 
