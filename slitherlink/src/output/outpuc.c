@@ -60,6 +60,13 @@
 
 
 
+  void show_board(){
+    
+  }
+
+
+
+
   int main(int argc, char ** argv){
           int _verbose = 0;
 
@@ -107,6 +114,16 @@
       generate_grid();
       return EXIT_SUCCESS;
     } */
+
+
+
+
+
+          /* AFFICHAGE */
+          show_board();
+
+
+
 
 
             if (N<1 || M<1){
