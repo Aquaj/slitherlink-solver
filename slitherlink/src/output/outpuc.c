@@ -25,7 +25,7 @@ void show_help(){
 
 //option -g[NxM],--generate[=NxM]
 //generate a grid of size NxM (default:8x8)
-void generate_grid(int NN, int MM){
+void generate_grid(){
   //TODO
 }
 
@@ -73,12 +73,18 @@ int main(int argc, char ** argv)
     char short_option = argv[1][1];
     char long_option = argv[1][2];
     if(short_option == 'g' || (short_option == '-' && long_option == 'g')){
-      generate_grid(1,2);
+      generate_grid();
       return EXIT_SUCCESS;
     }
 
     if(!strcmp(argv[1], "-a") || !strcmp(argv[1], "--all")){
       search_all_possible_solutions();
+      return EXIT_SUCCESS;
+    }
+
+    if(!strcmp(argv[1], "-u") || !strcmp(argv[1], "--unique")){
+      generate_grid_unique();
+      printf("cc");
       return EXIT_SUCCESS;
     }
 
