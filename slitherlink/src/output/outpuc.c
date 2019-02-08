@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 #define M 10
 #define N 10
-#define VERSION 0.1
+#define VERSION 0.01012
 
 //METTRE UN GENERATEUR AU PIF POUR TESTER
 
+//option -h
+//show the help section
 void show_help(){
   printf("Usage: slitherlink [-a|-o FILE|-v|-V|-h] FILE...\n");
   printf("       slitherlink -g[SIZE] [-u|-o FILE|-v|-V|-h] \n");
@@ -24,7 +25,7 @@ void show_help(){
 
 //option -g[NxM],--generate[=NxM]
 //generate a grid of size NxM (default:8x8)
-void generate_grid(int NN, int MM, bool unique){
+void generate_grid(int NN, int MM){
   //TODO
 }
 
@@ -59,14 +60,34 @@ void show_version(){
 
 int main(int argc, char ** argv)
 {
-
-  for(int i=0; i<argc; ++i){
-    if(!strcmp(argv[i], "-h")) show_help();
-
- if(!strcmp(argv[i], "-V") || !strcmp(argv[i], "--version")){
-   show_version();
-   }
+  if(argc==1 || !strcmp(argv[1], "-h")){
+    show_help();
+    return EXIT_SUCCESS;
   }
+
+  if(!strcmp(argv[1], "-V") || !strcmp(argv[1], "--version")){
+    show_version();
+    return EXIT_SUCCESS;
+  }
+  if(argc!=1){
+    char short_option = argv[1][1];
+    char long_option = argv[1][2];
+    if(short_option == 'g' || (short_option == '-' && long_option == 'g')){
+      generate_grid(1,2);
+      return EXIT_SUCCESS;
+    }
+
+    if(!strcmp(argv[1], "-a") || !strcmp(argv[1], "--all")){
+      search_all_possible_solutions();
+      return EXIT_SUCCESS;
+    }
+
+  }
+
+  /*if(!strcmp(argv[i], "-g[NxM]") || !strcmp(argv[i], "--version")){
+    generate_grid();
+    return EXIT_SUCCESS;
+  }*/
 
 
   if(N<1 || M<1){
