@@ -37,4 +37,5 @@ void map_fill(struct map* my_map, int x, int y){
   start_node->y = y;
 
   graph_start(my_graph, start_node);
+  generate_loop(my_map, my_graph);
 }
