@@ -1,8 +1,12 @@
 #ifndef ___loop_h___
 #define ___loop_h___
 
-#include "graph.h"
+#include "../struct/graph.h"
+#include "../struct/map.h"
+#include "../annexe/tsp.h"
 
-struct node* choose_next(struct map* my_map, struct node* my_node);
+struct map;
+struct graph;
+
 void generate_loop(struct graph* my_graph, struct map* my_map);
 #endif

@@ -2,6 +2,20 @@
 #define ___map_h___
 
 #include "point.h"
+#include "graph.h"
+#include "../generator/loop.h"
+
+struct coord{
+  int x;
+  int y;
+};
+
+enum orientation{
+  UP,
+  RIGHT,
+  DOWN,
+  LEFT
+};
 
 struct map{
   int n;
@@ -17,5 +31,6 @@ void map_free(struct map* my_map);
 
 //
 void map_fill(struct map* my_map, int x, int y);
+struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori);
 
 #endif

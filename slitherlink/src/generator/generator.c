@@ -19,3 +19,9 @@ void draw_loop(struct map* my_map){
 
   map_fill(my_map, x, y);
 }
+
+int main(){
+  struct map* my_map = map_init(3,3);
+
+  draw_loop(my_map);
+}

@@ -1,7 +1,7 @@
 #ifndef ___generator_h___
 #define ___generator_h___
 
-#include "map.h"
+#include "../struct/map.h"
 #include "loop.h"
 
 struct map* generate_map(int n, int m);
