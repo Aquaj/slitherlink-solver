@@ -22,6 +22,6 @@ int main(){
   struct graph* my_graph = graph_init();
 
   draw_loop(my_map, my_graph);
-
+  printf("\n\n HEY \n\n");
   draw_all_values(my_map, my_graph);
 }

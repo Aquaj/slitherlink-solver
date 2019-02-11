@@ -2,6 +2,9 @@
   #include <stdlib.h>
   #include <string.h>
 
+  #include "../generator/generator.h"
+  #include "../struct/map.h"
+
   #define M 10
   #define N 10
   #define VERSION 0.01012
@@ -61,7 +64,7 @@
 
 
   void show_board(){
-    
+
   }
 
 
@@ -104,6 +107,13 @@
                                   generate_grid_unique(_verbose);
                                   return EXIT_SUCCESS;
                           }
+
+
+                          struct map* my_map = generate_map(5,5);
+                          struct graph* my_graph = graph_init();
+                          //draw_map(my_map, my_graph);
+                          draw_loop(my_map, my_graph);
+
 
 
                   }

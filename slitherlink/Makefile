@@ -12,5 +12,7 @@ CC=gcc
 generator:
 	cc src/generator/generator.c src/generator/loop.c src/struct/map.c src/struct/graph.c src/annexe/tsp.c src/struct/edge.c
 
+output:
+	cc src/generator/generator.c src/generator/loop.c src/struct/map.c src/struct/graph.c src/annexe/tsp.c src/struct/edge.c src/output/output.c
 clean:
 	rm a.out
