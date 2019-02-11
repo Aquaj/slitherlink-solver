@@ -56,6 +56,4 @@ void graph_print(struct graph* my_graph){
     printf("(%d, %d)-->", my_node->x, my_node->y);
     my_node = my_node->next;
   }
-  my_node = my_graph->start;
-  printf("(%d, %d)", my_node->x, my_node->y);
 }

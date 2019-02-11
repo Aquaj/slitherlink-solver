@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "tsp.h"
 
@@ -17,6 +18,10 @@ struct coord* tsp_init(struct map *my_map, int N)
   int cost = 0;
 
   struct coord *chosen_points = choose_points(my_map, N);
+
+  for(int i=0; i<N; i++){
+    printf("Random Chosen Point : (%d, %d)\n", chosen_points[i].x, chosen_points[i].y);
+  }
 
   // Distances entre les points
 
@@ -40,20 +45,47 @@ void cost_distance(struct map* my_map, struct coord *chosen_points, int **cost_a
   }
 
 }
+
+struct coord random_coords(int min_x, int max_x, int min_y, int max_y){
+  struct coord my_coord;
+  int xr = (rand() % (max_x + 1 - min_x)) + min_x;
+  int yr = (rand() % (max_y + 1 - min_y)) + min_y;
+  my_coord.x = xr;
+  my_coord.y = yr;
+
+  return my_coord;
+}
+
 struct coord *choose_points(struct map *my_map, int N){
   int n = my_map->n;
   int m = my_map->m;
 
+  srand(time(0));
+
   struct coord *chosen_points = malloc(N*sizeof(struct coord));
+  chosen_points[0] = random_coords(0, n/2, 0, m/2);
+  chosen_points[1] = random_coords(0, n/2, m/2+1, m);
+  chosen_points[2] = random_coords(n/2+1, n, 0, m/2);
+  chosen_points[3] = random_coords(n/2+1, n, m/2+1, m);
+  printf("x -> [%d, %d], y -> [%d, %d]\n", 0, n/2, 0, m/2);
+  printf("x -> [%d, %d], y -> [%d, %d]\n", 0, n/2, m/2+1, m);
+  printf("x -> [%d, %d], y -> [%d, %d]\n", n/2+1, n, 0, m/2);
+  printf("x -> [%d, %d], y -> [%d, %d]\n", n/2+1, n, m/2+1, m);
+
+  /*
   for(int i=0; i<N; i++){
-    int diff=0;
-    int changed=0;
-    chosen_points[i].x = rand() % n;
-    chosen_points[i].y = rand() % m;
+    //int diff=0;
+    //int changed=0;
+
+    //do{
+      chosen_points[i] = random_coords(0, n/2, (m/2)*(i%2), (m/2)*((i+1)%2));
+    //}while(chosen_points[i].x == 0 || chosen_points[i].x == n || chosen_points[i].y == 0 || chosen_points[i].y == m);
+
     while(diff<i){
       while((chosen_points[diff].x == chosen_points[i].x) && (chosen_points[diff].y ==  chosen_points[i].y)){
-        chosen_points[i].x = rand() % n;
-        chosen_points[i].y = rand() % m;
+        //do{
+          chosen_points[i] = random_coords(n, m);
+        //}while(chosen_points[i].x == 0 || chosen_points[i].x == n || chosen_points[i].y == 0 || chosen_points[i].y == m);
         changed = 1;
       }
       if(changed){
@@ -64,8 +96,9 @@ struct coord *choose_points(struct map *my_map, int N){
         diff++;
       }
     }
-  }
 
+  }
+*/
   return chosen_points;
 }
 

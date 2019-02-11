@@ -9,19 +9,19 @@ struct map* generate_map(int n, int m){
   return my_map;
 }
 
-void draw_loop(struct map* my_map){
-  int n = my_map->n;
-  int m = my_map->m;
+void draw_loop(struct map* my_map, struct graph* my_graph){
+  map_fill(my_map, my_graph);
+}
 
-  // Random point
-  int x=0;
-  int y=0;
-
-  map_fill(my_map, x, y);
+void draw_all_values(struct map* my_map, struct graph* my_graph){
+  map_fill_values(my_map, my_graph);
 }
 
 int main(){
-  struct map* my_map = map_init(3,3);
+  struct map* my_map = generate_map(6,6);
+  struct graph* my_graph = graph_init();
 
-  draw_loop(my_map);
+  draw_loop(my_map, my_graph);
+
+  draw_all_values(my_map, my_graph);
 }

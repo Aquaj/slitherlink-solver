@@ -8,5 +8,5 @@
 struct map;
 struct graph;
 
-void generate_loop(struct graph* my_graph, struct map* my_map);
+void generate_loop(struct map* my_map, struct graph* my_graph);
 #endif

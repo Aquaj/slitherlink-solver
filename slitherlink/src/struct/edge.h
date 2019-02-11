@@ -13,5 +13,8 @@ struct edge{
 };
 
 void set_edge(struct edge* my_edge, enum state my_state);
+int is_drawn(struct edge my_edge);
+int is_empty(struct edge my_edge);
+int is_crossed(struct edge my_edge);
 
 #endif

@@ -4,6 +4,10 @@
 #include "point.h"
 #include "graph.h"
 #include "../generator/loop.h"
+#include "../struct/square.h"
+#include "../struct/edge.h"
+
+struct graph;
 
 struct coord{
   int x;
@@ -11,10 +15,10 @@ struct coord{
 };
 
 enum orientation{
-  UP,
-  RIGHT,
-  DOWN,
-  LEFT
+  UP,     // 0
+  RIGHT,  // 1
+  DOWN,   // 2
+  LEFT    // 3
 };
 
 struct map{
@@ -30,7 +34,8 @@ struct map* map_init(int n, int m);
 void map_free(struct map* my_map);
 
 //
-void map_fill(struct map* my_map, int x, int y);
+void map_fill(struct map* my_map, struct graph* my_graph);
+void map_fill_values(struct map* my_map, struct graph* my_graph);
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori);
 
 #endif
