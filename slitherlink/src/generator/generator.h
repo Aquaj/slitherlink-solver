@@ -9,5 +9,6 @@ void draw_loop(struct map* my_map, struct graph* my_graph);
 void draw_all_values(struct map* my_map, struct graph* my_graph);
 void draw_values(struct map* my_map);
 void remove_values(struct map* my_map);
+void fill_points(struct map* my_map);
 
 #endif

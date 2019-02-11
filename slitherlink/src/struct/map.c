@@ -135,3 +135,7 @@ void map_remove_values(struct map* my_map){
     }
   }
 }
+
+void map_fill_points(struct map* my_map){
+  
+}

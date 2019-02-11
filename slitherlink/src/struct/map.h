@@ -38,5 +38,6 @@ void map_fill(struct map* my_map, struct graph* my_graph);
 void map_fill_values(struct map* my_map, struct graph* my_graph);
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori);
 void map_remove_values(struct map* my_map);
+void map_fill_points(struct map* my_map);
 
 #endif
