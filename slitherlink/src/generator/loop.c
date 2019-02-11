@@ -5,7 +5,26 @@
 #include "loop.h"
 #include "../struct/edge.h"
 
-void priority_ori(struct coord first, struct coord second, enum orientation *prio_arr){
+int which_quadrant(struct coord my_node_coord, int n, int m){
+  if(my_node_coord.x > 0 && my_node_coord.x < n/2){
+    if(my_node_coord.y > 0 && my_node_coord.y < m/2){
+      return 0;
+    }
+    else{
+      return 1;
+    }
+  }
+  else{
+    if(my_node_coord.y > 0 && my_node_coord.y < m/2){
+      return 4;
+    }
+    else{
+      return 3;
+    }
+  }
+}
+
+void priority_ori(struct coord first, struct coord second, enum orientation *prio_arr, int quadrant){
   int x = first.x > second.x;
   int y = first.y > second.y;
 
@@ -35,6 +54,12 @@ void priority_ori(struct coord first, struct coord second, enum orientation *pri
     prio_arr[0] = prio_arr[1];
     prio_arr[1] = tmp;
   }
+
+  if(quadrant == 0 || quadrant == 2){
+    enum orientation tmp = prio_arr[0];
+    prio_arr[0] = prio_arr[1];
+    prio_arr[1] = tmp;
+  }
 }
 
 void connect_nodes(struct graph *my_graph, struct map* my_map, struct coord first, struct coord second){
@@ -50,7 +75,8 @@ void connect_nodes(struct graph *my_graph, struct map* my_map, struct coord firs
   printf("first : %d %d, second : %d %d\n", first.x, first.y, second.x, second.y);
   struct coord next;
   do{
-    priority_ori(my_node_coord, second, prio_arr);
+    int quadrant = which_quadrant(my_node_coord, my_map->n, my_map->m);
+    priority_ori(my_node_coord, second, prio_arr, quadrant);
     next = neighbor(my_map, my_node_coord, prio_arr[0]);
     printf("Potential Priority : %d\n", prio_arr[0]);
     printf("Potential neighbor (%d, %d)\n", next.x, next.y);

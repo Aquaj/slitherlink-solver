@@ -90,3 +90,48 @@ void map_fill_values(struct map* my_map, struct graph* my_graph){
     }
   }
 }
+
+void map_remove_values(struct map* my_map){
+  assert(my_map);
+  int ones = 0;
+  int twos = 0;
+  int threes = 0;
+
+  for(int i=0; i<my_map->n; i++){
+    for(int j=0; j<my_map->m; j++){
+      switch(my_map->squares[i][j].value){
+        case 0:
+          my_map->squares[i][j].value = -1;
+        break;
+        case 1:
+          ones++;
+          if(ones < 3){
+            my_map->squares[i][j].value = -1;
+          }
+          else{
+            ones = 0;
+          }
+        break;
+        case 2:
+          twos++;
+          if(twos < 2){
+            my_map->squares[i][j].value = -1;
+          }
+          else{
+            twos = 0;
+          }
+        break;
+        case 3:
+          threes++;
+          if(threes < 4){
+            my_map->squares[i][j].value = -1;
+          }
+          else{
+            threes = 0;
+          }
+        break;
+      }
+      printf("new square [%d %d] : %d\n", i, j, my_map->squares[i][j].value);
+    }
+  }
+}
