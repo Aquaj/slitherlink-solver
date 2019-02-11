@@ -56,7 +56,7 @@
             printf(" %d ", my_map->squares[i][j].value);
           }
 
-        //if(my_map->squares[i][j].value==-1){}
+        if(my_map->squares[i][j].value==-1){}
           //  printf(" _ ");
       }
       printf("\n");
