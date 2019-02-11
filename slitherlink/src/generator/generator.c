@@ -17,11 +17,11 @@ void draw_all_values(struct map* my_map, struct graph* my_graph){
   map_fill_values(my_map, my_graph);
 }
 
-int main(){
-  struct map* my_map = generate_map(5,5);
-  struct graph* my_graph = graph_init();
-
-  draw_loop(my_map, my_graph);
-  printf("\n\n HEY \n\n");
-  draw_all_values(my_map, my_graph);
-}
+// int main(){
+//   struct map* my_map = generate_map(5,5);
+//   struct graph* my_graph = graph_init();
+//
+//   draw_loop(my_map, my_graph);
+//   printf("\n\n HEY \n\n");
+//   draw_all_values(my_map, my_graph);
+// }

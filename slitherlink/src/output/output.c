@@ -5,8 +5,8 @@
   #include "../generator/generator.h"
   #include "../struct/map.h"
 
-  #define M 10
-  #define N 10
+  #define M 5
+  #define N 5
   #define VERSION 0.01012
 
 
@@ -31,7 +31,29 @@
   /* option -g[NxM],--generate[=NxM]
      generate a grid of size NxM (default:8x8) */
   void generate_grid(int _verbose){
-          //TODO
+    struct map* my_map = generate_map(N,M);
+    struct graph* my_graph = graph_init();
+    draw_loop(my_map, my_graph);
+    draw_all_values(my_map, my_graph);
+    for(int i=0 ; i<N ; ++i){
+      for(int j=0 ; j<M ; ++j){
+          if(my_map->edges_h[i][j].state==DRAWN){
+            printf("\x1b[7m %d \x1b[0m", my_map->squares[i][j].value);
+          }else{
+            printf(" %d ", my_map->squares[i][j].value);
+          }
+
+          if(my_map->squares[i][j].value==-1){}
+            printf(" _ ");
+
+      }
+      printf("\n");
+
+    }
+    //printf("\n\nValeur du point (%d, %d) = %d\n", my_graph->start->x, my_graph->start->y,  my_map->squares[i][j].value);
+    //printf("\n\nValeur du point (%d, %d) = %d\n", i, j,  my_map->squares[i][j].value);
+
+
   }
 
   /* option -a,--all
@@ -109,10 +131,7 @@
                           }
 
 
-                          struct map* my_map = generate_map(5,5);
-                          struct graph* my_graph = graph_init();
-                          //draw_map(my_map, my_graph);
-                          draw_loop(my_map, my_graph);
+
 
 
 
