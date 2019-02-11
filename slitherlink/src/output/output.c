@@ -64,8 +64,6 @@ void generate_grid(int _verbose){
     }
     printf("\n");
 
-    //TODO: still things to do
-
   }
 
 }
@@ -99,9 +97,11 @@ void show_version(){
 
 
 
+/* A FAIRE
+
 void show_board(){
 
-}
+}*/
 
 
 
@@ -157,14 +157,6 @@ int main(int argc, char ** argv){
   generate_grid();
   return EXIT_SUCCESS;
 } */
-
-
-
-
-
-/* AFFICHAGE */
-show_board();
-
 
 
 
