@@ -25,6 +25,10 @@ void fill_points(struct map* my_map){
   map_fill_points(my_map);
 }
 
+void init_edges(struct map* my_map){
+  //map_init_edges(my_map);
+}
+
 int main(){
   struct map* my_map = generate_map(5,5);
   struct graph* my_graph = graph_init();
@@ -33,7 +37,13 @@ int main(){
 
   draw_all_values(my_map, my_graph);
 
-  //remove_values(my_map);
+  generate_grid(my_map, my_graph, 0);
+
+  remove_values(my_map);
 
   fill_points(my_map);
+
+  //init_edges(my_map);
+
+  generate_grid(my_map, my_graph, 0);
 }
