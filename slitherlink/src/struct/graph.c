@@ -18,7 +18,7 @@ struct node* graph_end(struct graph* my_graph){
   assert(my_graph->start);
 
   struct node *my_node = my_graph->start;
-  while(my_node->next){
+  while(my_node->next && (my_node->next->x != my_graph->start->x || my_node->next->y != my_graph->start->y)){
     my_node = my_node->next;
   }
 

@@ -9,7 +9,7 @@ enum state {
   };
 
 struct edge{
-  int state : 2;
+  int state : 3; // 2 bit doesn't work ???
 };
 
 void set_edge(struct edge* my_edge, enum state my_state);

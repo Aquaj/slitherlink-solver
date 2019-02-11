@@ -18,7 +18,7 @@ void draw_all_values(struct map* my_map, struct graph* my_graph){
 }
 
 int main(){
-  struct map* my_map = generate_map(6,6);
+  struct map* my_map = generate_map(5,5);
   struct graph* my_graph = graph_init();
 
   draw_loop(my_map, my_graph);

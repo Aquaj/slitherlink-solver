@@ -24,11 +24,11 @@ struct coord* tsp_init(struct map *my_map, int N)
   }
 
   // Distances entre les points
-
+/*
   cost_distance(my_map, chosen_points, cost_ary, N);
 
   mincost(0, &cost, cost_ary, completed, chosen_points, N);
-
+*/
   return chosen_points;
 }
 
@@ -65,12 +65,8 @@ struct coord *choose_points(struct map *my_map, int N){
   struct coord *chosen_points = malloc(N*sizeof(struct coord));
   chosen_points[0] = random_coords(0, n/2, 0, m/2);
   chosen_points[1] = random_coords(0, n/2, m/2+1, m);
-  chosen_points[2] = random_coords(n/2+1, n, 0, m/2);
-  chosen_points[3] = random_coords(n/2+1, n, m/2+1, m);
-  printf("x -> [%d, %d], y -> [%d, %d]\n", 0, n/2, 0, m/2);
-  printf("x -> [%d, %d], y -> [%d, %d]\n", 0, n/2, m/2+1, m);
-  printf("x -> [%d, %d], y -> [%d, %d]\n", n/2+1, n, 0, m/2);
-  printf("x -> [%d, %d], y -> [%d, %d]\n", n/2+1, n, m/2+1, m);
+  chosen_points[2] = random_coords(n/2+1, n, m/2+1, m);
+  chosen_points[3] = random_coords(n/2+1, n, 0, m/2);
 
   /*
   for(int i=0; i<N; i++){

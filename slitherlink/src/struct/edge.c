@@ -21,6 +21,8 @@ void set_edge(struct edge* my_edge, enum state my_state){
       assert(NULL);
     break;
   }
+
+  printf("STATE == %d\n", my_edge->state);
 }
 
 int is_drawn(struct edge my_edge){

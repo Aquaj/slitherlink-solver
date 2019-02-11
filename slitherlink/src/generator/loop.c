@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include "loop.h"
 #include "../struct/edge.h"
@@ -111,24 +112,36 @@ void connect_nodes(struct graph *my_graph, struct map* my_map, struct coord firs
 void generate_loop(struct map* my_map, struct graph* my_graph){
   int N = 4; // Number of points (n*m * 0.1)
 
-  struct coord* chosen_points = tsp_init(my_map, N);
+  struct coord* chosen_points;
+  struct node* start_node;
+  struct node* end_node;
 
-  for(int i=0; i<N; i++){
-    printf("Chosen Point : (%d, %d)\n", chosen_points[i].x, chosen_points[i].y);
-  }
+  // Free graph after each try
+  do{
+    chosen_points = tsp_init(my_map, N);
 
-  struct node* start_node = malloc(sizeof(struct node));
-  start_node->x = chosen_points[0].x;
-  start_node->y = chosen_points[0].y;
-
-  graph_start(my_graph, start_node);
-
-  for(int i=0; i<N; i++){
-    if(i==N-1){
-      connect_nodes(my_graph, my_map, chosen_points[i], chosen_points[0]);
+    for(int i=0; i<N; i++){
+      printf("Chosen Point : (%d, %d)\n", chosen_points[i].x, chosen_points[i].y);
     }
-    else{
-      connect_nodes(my_graph, my_map, chosen_points[i], chosen_points[i+1]);
+
+    start_node = malloc(sizeof(struct node));
+    start_node->x = chosen_points[0].x;
+    start_node->y = chosen_points[0].y;
+
+    graph_start(my_graph, start_node);
+
+
+    for(int i=0; i<N; i++){
+      if(i==N-1){
+        connect_nodes(my_graph, my_map, chosen_points[i], chosen_points[0]);
+      }
+      else{
+        connect_nodes(my_graph, my_map, chosen_points[i], chosen_points[i+1]);
+      }
     }
-  }
+
+    end_node = graph_end(my_graph);
+  }while(end_node->next->x != start_node->x || end_node->next->y != start_node->y);
+  //printf("IS DONE : %d\n", (start_node->x == end_node->next->x && start_node->y == end_node->next->y));
+  assert(end_node->next);
 }

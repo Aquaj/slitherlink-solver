@@ -86,7 +86,7 @@ void map_fill_values(struct map* my_map, struct graph* my_graph){
   for(int i=0; i<my_map->n; i++){
     for(int j=0; j<my_map->m; j++){
       my_map->squares[i][j].value = is_drawn(my_map->edges_h[i][j]) + is_drawn(my_map->edges_h[i+1][j]) + is_drawn(my_map->edges_v[i][j]) + is_drawn(my_map->edges_v[i][j+1]);
-      printf("square %d %d : %d\n", i, j, my_map->squares[i][j].value);
+      printf("square [%d %d] : %d\n", i, j, my_map->squares[i][j].value);
     }
   }
 }
