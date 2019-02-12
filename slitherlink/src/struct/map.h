@@ -33,7 +33,7 @@ struct map{
 struct map* map_init(int n, int m);
 void map_free(struct map* my_map);
 
-//
+// map
 void map_fill(struct map* my_map, struct graph* my_graph);
 void map_fill_values(struct map* my_map, struct graph* my_graph);
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori);
