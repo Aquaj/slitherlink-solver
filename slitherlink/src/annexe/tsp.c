@@ -63,10 +63,20 @@ struct coord *choose_points(struct map *my_map, int N){
   srand(time(0));
 
   struct coord *chosen_points = malloc(N*sizeof(struct coord));
-  chosen_points[0] = random_coords(0, n/2, 0, m/2);
-  chosen_points[1] = random_coords(0, n/2, m/2+1, m);
-  chosen_points[2] = random_coords(n/2+1, n, m/2+1, m);
-  chosen_points[3] = random_coords(n/2+1, n, 0, m/2);
+  // chosen_points[0] = random_coords(0, n/2, 0, m/2);
+  // chosen_points[1] = random_coords(0, n/2, m/2+1, m);
+  // chosen_points[2] = random_coords(n/2+1, n, m/2+1, m);
+  // chosen_points[3] = random_coords(n/2+1, n, 0, m/2);
+
+  chosen_points[0].x = 1;
+  chosen_points[0].y = 1;
+  chosen_points[1].x = 1;
+  chosen_points[1].y = 4;
+  chosen_points[2].x = 4;
+  chosen_points[2].y = 4;
+  chosen_points[3].x = 4;
+  chosen_points[3].y = 1;
+
 
   /*
   for(int i=0; i<N; i++){

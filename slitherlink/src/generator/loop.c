@@ -28,6 +28,20 @@ void priority_ori(struct coord first, struct coord second, enum orientation *pri
   int x = first.x > second.x;
   int y = first.y > second.y;
 
+  if(first.x == second.x){
+    if(first.y < second.y)
+      prio_arr[0] = RIGHT;
+    else
+      prio_arr[0] = LEFT;
+  }
+
+  if(first.y == second.y){
+    if(first.x < second.x)
+      prio_arr[0] = DOWN;
+    else
+      prio_arr[0] = UP;
+  }
+/*
   switch(x){
     case 1:
       prio_arr[0] = UP;
@@ -56,10 +70,20 @@ void priority_ori(struct coord first, struct coord second, enum orientation *pri
   }
 
   if(quadrant == 0 || quadrant == 2){
-    enum orientation tmp = prio_arr[0];
-    prio_arr[0] = prio_arr[1];
-    prio_arr[1] = tmp;
+    if(!x){
+      enum orientation tmp = prio_arr[0];
+      prio_arr[0] = prio_arr[1];
+      prio_arr[1] = tmp;
+    }
   }
+  else{
+    if(!y && first.y != second.y){
+      enum orientation tmp = prio_arr[0];
+      prio_arr[0] = prio_arr[1];
+      prio_arr[1] = tmp;
+    }
+  }
+  */
 }
 
 void connect_nodes(struct graph *my_graph, struct map* my_map, struct coord first, struct coord second){

@@ -7,7 +7,7 @@ struct map* map_init(int n, int m){
   struct map* my_map = malloc(sizeof(struct map));
   my_map->points = malloc((n+1)*sizeof(struct point*));
   for(int i=0; i<m+1; i++){
-    my_map->points[i] = malloc((m+1)*sizeof(struct point));
+    my_map->points[i] = calloc((m+1),sizeof(struct point));
   }
 
   my_map->edges_h = malloc((n+1)*sizeof(struct edge*));
@@ -137,20 +137,15 @@ void map_remove_values(struct map* my_map){
 }
 
 void map_fill_points(struct map* my_map){
-
+  struct coord my_square_coord;
   for(int i=0; i<my_map->n; i++){
     for(int j=0; j<my_map->m; j++){
-      struct coord my_square_coord;
       my_square_coord.x = i;
       my_square_coord.y = j;
       int my_square_value = my_map->squares[i][j].value;
       set_square_points(my_map, my_square_coord, my_square_value);
     }
   }
-
-  for(int i=0; i<my_map->n+1; i++){
-    for(int j=0; j<my_map->m+1; j++){
-      printf("point [%d][%d] : %d\n", i, j, my_map->points[i][j].UR);
-    }
-  }
 }
+
+void map_init_edges(struct map* my_map);

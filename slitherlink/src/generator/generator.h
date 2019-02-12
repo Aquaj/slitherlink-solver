@@ -3,6 +3,7 @@
 
 #include "../struct/map.h"
 #include "loop.h"
+#include "../output/output.h"
 
 struct map* generate_map(int n, int m);
 void draw_loop(struct map* my_map, struct graph* my_graph);

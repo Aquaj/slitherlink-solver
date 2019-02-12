@@ -5,8 +5,6 @@
 #include "../generator/generator.h"
 #include "../struct/map.h"
 
-#define M 4
-#define N 4
 #define VERSION 0.01012
 
 
@@ -31,24 +29,18 @@ void show_help(){
 /* option -g[NxM],--generate[=NxM]
 generate a grid of size NxM (default:8x8) */
 
-void generate_grid(int _verbose){
-  struct map* my_map = generate_map(N,M);
-  struct graph* my_graph = graph_init();
-  draw_loop(my_map, my_graph);
-  draw_all_values(my_map, my_graph);
-  remove_values(my_map);
-
+void generate_grid(struct map* my_map, struct graph* my_graph, int _verbose){
   char* str_start = "\x1b[7m";
   char* str_end = "\x1b[0m";
 
   int cpt = 0;
 
-  for(int i=0 ; i<N ; ++i){
-    for(int j=0 ; j<M+1 ; ++j){
+  for(int i=0 ; i<my_map->n ; ++i){
+    for(int j=0 ; j<my_map->m+1 ; ++j){
       if(my_map->edges_v[i][j].state==DRAWN){
         cpt++;
       }
-      if(j!=M){
+      if(j!=my_map->m){
         if(my_map->squares[i][j].value == -1){
           if(cpt%2 == 1)
             printf("\x1b[7m _ \x1b[0m");
@@ -104,8 +96,9 @@ void show_board(){
 }*/
 
 
-
-
+// Completer .h
+// Move main to output_test.c
+/*
 int main(int argc, char ** argv){
   int _verbose = 0;
 
@@ -153,10 +146,10 @@ int main(int argc, char ** argv){
 
   }
 
-  /* if (!strcmp(argv[i], "-g[NxM]") || !strcmp(argv[i], "--version")){
+   if (!strcmp(argv[i], "-g[NxM]") || !strcmp(argv[i], "--version")){
   generate_grid();
   return EXIT_SUCCESS;
-} */
+}
 
 
 
@@ -166,3 +159,4 @@ if (N<1 || M<1){
   return 1;
 }
 }
+*/
