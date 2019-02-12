@@ -30,7 +30,7 @@ void init_edges(struct map* my_map){
 }
 
 int main(){
-  struct map* my_map = generate_map(5,5);
+  struct map* my_map = generate_map(10,10);
   struct graph* my_graph = graph_init();
 
   draw_loop(my_map, my_graph);
