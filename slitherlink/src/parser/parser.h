@@ -1,18 +1,17 @@
 #ifndef ___parser_h___
 #define ___parser_h___
-
-#include map.h
+#include <stdio.h>
+#include <stdlib.h>
+#include "../struct/map.h"
 
 enum q_state{
-  q0,
-  q1,
-  q2,
-  qver,
-  qerr,
-  qout
-}
+  Q0,
+  Q1,
+  Q_IGN,
+  Q_ERR,
+  Q_OUT
+};
 
-void file_parse(FILE* my_file);
-
+void file_parse(FILE* file, enum q_state state);
 
 #endif
