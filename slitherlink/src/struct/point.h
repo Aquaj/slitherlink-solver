@@ -16,22 +16,13 @@
 
 struct map;
 struct coord;
+enum orientation;
 
-enum direction {
-  UR,
-  UL,
-  DR,
-  DL
-  };
+//void set_square_points(struct map* my_map, struct coord my_square_coord, int my_square_value);
 
-struct point{
-  int UR : 4;
-  int UL : 4;
-  int DR : 4;
-  int DL : 4;
-};
+void set_drawn_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
+int get_drawn_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
+void draw_line(struct map* my_map, struct coord first, struct coord second, enum orientation my_ori);
 
-void set_point(struct point *my_point, enum direction dir, int set);
-void set_square_points(struct map* my_map, struct coord my_square_coord, int my_square_value);
 
 #endif

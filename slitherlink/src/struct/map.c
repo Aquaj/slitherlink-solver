@@ -5,24 +5,9 @@
 
 struct map* map_init(int n, int m){
   struct map* my_map = malloc(sizeof(struct map));
-  my_map->points = malloc((n+1)*sizeof(struct point*));
+  my_map->points = malloc((n+1)*sizeof(char*));
   for(int i=0; i<m+1; i++){
-    my_map->points[i] = calloc((m+1),sizeof(struct point));
-  }
-
-  my_map->edges_h = malloc((n+1)*sizeof(struct edge*));
-  for(int i=0; i<n+1; i++){
-    my_map->edges_h[i] = malloc((m)*sizeof(struct edge));
-  }
-
-  my_map->edges_v = malloc((n)*sizeof(struct edge*));
-  for(int i=0; i<n; i++){
-    my_map->edges_v[i] = malloc((m+1)*sizeof(struct edge));
-  }
-
-  my_map->squares = malloc((n)*sizeof(struct square*));
-  for(int i=0; i<n; i++){
-    my_map->squares[i] = malloc((m)*sizeof(struct square));
+    my_map->points[i] = calloc((m+1),sizeof(char));
   }
 
   my_map->n = n;
@@ -38,7 +23,7 @@ struct coord neighbor(struct map* my_map, struct coord my_point, enum orientatio
   my_neighbor.x = -1;
   my_neighbor.y = -1;
   switch(my_ori){
-    case UP:
+    case NORTH:
       if(x==0){
         return my_neighbor;
       }
@@ -46,7 +31,7 @@ struct coord neighbor(struct map* my_map, struct coord my_point, enum orientatio
       my_neighbor.y = y;
       return my_neighbor;
     break;
-    case RIGHT:
+    case EAST:
       if(y==my_map->m){
         return my_neighbor;
       }
@@ -54,7 +39,7 @@ struct coord neighbor(struct map* my_map, struct coord my_point, enum orientatio
       my_neighbor.y = y+1;
       return my_neighbor;
     break;
-    case DOWN:
+    case SOUTH:
       if(x==my_map->n){
         return my_neighbor;
       }
@@ -62,7 +47,7 @@ struct coord neighbor(struct map* my_map, struct coord my_point, enum orientatio
       my_neighbor.y = y;
       return my_neighbor;
     break;
-    case LEFT:
+    case WEST:
       if(y==0){
         return my_neighbor;
       }
@@ -75,68 +60,16 @@ struct coord neighbor(struct map* my_map, struct coord my_point, enum orientatio
     break;
   }
 }
-
+/*
 void map_fill(struct map* my_map, struct graph* my_graph){
   generate_loop(my_map, my_graph);
 
   graph_print(my_graph);
 }
-
-void map_fill_values(struct map* my_map, struct graph* my_graph){
-  for(int i=0; i<my_map->n; i++){
-    for(int j=0; j<my_map->m; j++){
-      my_map->squares[i][j].value = is_drawn(my_map->edges_h[i][j]) + is_drawn(my_map->edges_h[i+1][j]) + is_drawn(my_map->edges_v[i][j]) + is_drawn(my_map->edges_v[i][j+1]);
-      printf("square [%d %d] : %d\n", i, j, my_map->squares[i][j].value);
-    }
-  }
-}
-
-void map_remove_values(struct map* my_map){
-  assert(my_map);
-  int ones = 0;
-  int twos = 0;
-  int threes = 0;
-
-  for(int i=0; i<my_map->n; i++){
-    for(int j=0; j<my_map->m; j++){
-      switch(my_map->squares[i][j].value){
-        case 0:
-          my_map->squares[i][j].value = -1;
-        break;
-        case 1:
-          ones++;
-          if(ones < 3){
-            my_map->squares[i][j].value = -1;
-          }
-          else{
-            ones = 0;
-          }
-        break;
-        case 2:
-          twos++;
-          if(twos < 2){
-            my_map->squares[i][j].value = -1;
-          }
-          else{
-            twos = 0;
-          }
-        break;
-        case 3:
-          threes++;
-          if(threes < 4){
-            my_map->squares[i][j].value = -1;
-          }
-          else{
-            threes = 0;
-          }
-        break;
-      }
-      printf("new square [%d %d] : %d\n", i, j, my_map->squares[i][j].value);
-    }
-  }
-}
-
-void map_fill_points(struct map* my_map){
+*/
+/*
+// Fill points from parsed grid
+void map_fill_points(struct map* my_map, struct grid* my_grid){
   struct coord my_square_coord;
   for(int i=0; i<my_map->n; i++){
     for(int j=0; j<my_map->m; j++){
@@ -147,5 +80,57 @@ void map_fill_points(struct map* my_map){
     }
   }
 }
+*/
+void map_draw_line(struct map* my_map, struct coord first, struct coord second){
+  int x = first.x > second.x;
+  int y = first.y > second.y;
 
-void map_init_edges(struct map* my_map);
+  if(first.x == second.x){
+    if(!y){
+      draw_line(my_map, first, second, EAST);
+    }
+    else{
+      draw_line(my_map, first, second, WEST);
+    }
+  }
+
+  else if(first.y == second.y){
+    if(!x){
+      draw_line(my_map, first, second, SOUTH);
+    }
+    else{
+      draw_line(my_map, first, second, NORTH);
+    }
+  }
+}
+
+void map_draw_square(struct map* my_map){
+  struct coord first, second;
+  first.x = 0;
+  first.y = 0;
+  second.x = 0;
+  second.y = my_map->m;
+  map_draw_line(my_map, first, second);
+
+  first.x = 0;
+  first.y = my_map->m;
+  second.x = my_map->n;
+  second.y = my_map->m;
+  map_draw_line(my_map, first, second);
+
+  first.x = my_map->n;
+  first.y = my_map->m;
+  second.x = my_map->n;
+  second.y = 0;
+  map_draw_line(my_map, first, second);
+
+  first.x = my_map->n;
+  first.y = 0;
+  second.x = 0;
+  second.y = 0;
+  map_draw_line(my_map, first, second);
+}
+
+void map_loop_init(struct map* my_map){
+  map_draw_square(my_map);
+}

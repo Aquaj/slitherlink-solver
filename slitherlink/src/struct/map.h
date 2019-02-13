@@ -1,13 +1,11 @@
 #ifndef ___map_h___
 #define ___map_h___
 
-#include "point.h"
-#include "graph.h"
 #include "../generator/loop.h"
-#include "../struct/square.h"
-#include "../struct/edge.h"
+#include "grid.h"
+#include "point.h"
 
-struct graph;
+struct grid;
 
 struct coord{
   int x;
@@ -15,30 +13,24 @@ struct coord{
 };
 
 enum orientation{
-  UP,     // 0
-  RIGHT,  // 1
-  DOWN,   // 2
-  LEFT    // 3
+  NORTH,    // 0
+  EAST,     // 1
+  SOUTH,    // 2
+  WEST      // 3
 };
 
 struct map{
   int n;
   int m;
-  struct point** points; // n+1 * m+1
-  struct edge** edges_h; // n+1 * m
-  struct edge** edges_v; // n * m+1
-  struct square** squares; // n * m
+  char** points; // n+1 * m+1
 };
 
 struct map* map_init(int n, int m);
 void map_free(struct map* my_map);
 
-// map
-void map_fill(struct map* my_map, struct graph* my_graph);
-void map_fill_values(struct map* my_map, struct graph* my_graph);
+void map_fill_points(struct map* my_map, struct grid* my_grid);
+void map_loop_init(struct map* my_map);
+
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori);
-void map_remove_values(struct map* my_map);
-void map_fill_points(struct map* my_map);
-void map_init_edges(struct map* my_map);
 
 #endif
