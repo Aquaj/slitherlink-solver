@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../generator/generator.h"
-#include "../struct/map.h"
+#include "output.h"
 
 #define VERSION 0.01012
 
@@ -29,28 +28,31 @@ void show_help(){
 /* option -g[NxM],--generate[=NxM]
 generate a grid of size NxM (default:8x8) */
 
-void generate_grid(struct map* my_map, struct graph* my_graph, int _verbose){
+void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
   char* str_start = "\x1b[7m";
   char* str_end = "\x1b[0m";
 
   int cpt = 0;
 
-  for(int i=0 ; i<my_map->n ; ++i){
-    for(int j=0 ; j<my_map->m+1 ; ++j){
-      if(my_map->edges_v[i][j].state==DRAWN){
+  for(int i=0 ; i<my_grid->n ; i++){
+    for(int j=0 ; j<my_grid->m+1 ; j++){
+      struct coord my_edge;
+      my_edge.x = i;
+      my_edge.y = j;
+      if(is_edge_drawn(my_map, my_edge, 0)){
         cpt++;
       }
-      if(j!=my_map->m){
-        if(my_map->squares[i][j].value == -1){
+      if(j!=my_grid->m){
+        if(my_grid->squares[i][j] == 'N'){
           if(cpt%2 == 1)
             printf("\x1b[7m _ \x1b[0m");
           if(cpt%2 == 0)
             printf(" _ ");
         } else {
           if(cpt%2 == 1)
-            printf("\x1b[7m %d \x1b[0m", my_map->squares[i][j].value);
+            printf("\x1b[7m %c \x1b[0m", my_grid->squares[i][j]);
           if(cpt%2 == 0)
-            printf(" %d ", my_map->squares[i][j].value);
+            printf(" %c ", my_grid->squares[i][j]);
         }
       }
     }

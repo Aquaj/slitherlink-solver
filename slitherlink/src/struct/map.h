@@ -32,5 +32,6 @@ void map_fill_points(struct map* my_map, struct grid* my_grid);
 void map_loop_init(struct map* my_map);
 
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori);
+enum orientation opposite_orientation(enum orientation my_ori);
 
 #endif

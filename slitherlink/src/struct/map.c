@@ -16,6 +16,26 @@ struct map* map_init(int n, int m){
   return my_map;
 }
 
+enum orientation opposite_orientation(enum orientation my_ori){
+  switch(my_ori){
+    case NORTH:
+      return SOUTH;
+    break;
+    case EAST:
+      return WEST;
+    break;
+    case SOUTH:
+      return NORTH;
+    break;
+    case WEST:
+      return EAST;
+    break;
+    default:
+      assert(NULL);
+    break;
+  }
+}
+
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori){
   int x = my_point.x;
   int y = my_point.y;

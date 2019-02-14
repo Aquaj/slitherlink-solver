@@ -6,7 +6,11 @@
 
 struct map;
 struct coord;
+enum orientation;
 
 int is_edge_drawn(struct map *my_map, struct coord my_edge, int is_horizontal);
+int is_edge_crossed(struct map *my_map, struct coord my_edge, int is_horizontal);
+
+struct coord get_edge(struct coord my_square, enum orientation my_ori);
 
 #endif

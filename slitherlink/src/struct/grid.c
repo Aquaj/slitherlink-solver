@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "map.h"
 
 struct grid* grid_init(int n, int m){
@@ -21,17 +22,16 @@ void grid_fill(struct map* my_map, struct grid* my_grid){
   struct coord east_edge;
   struct coord south_edge;
   struct coord west_edge;
+  struct coord my_square;
   int value = 0;
   for(int i=0; i<my_grid->n; i++){
     for(int j=0; j<my_grid->m; j++){
-      north_edge.x = i;
-      north_edge.y = j;
-      east_edge.x = i;
-      east_edge.y = j+1;
-      south_edge.x = i+1;
-      south_edge.y = j;
-      west_edge.x = i;
-      west_edge.y = j;
+      my_square.x = i;
+      my_square.y = j;
+      north_edge = get_edge(my_square, NORTH);
+      east_edge = get_edge(my_square, EAST);
+      south_edge = get_edge(my_square, SOUTH);
+      west_edge = get_edge(my_square, WEST);
       value = is_edge_drawn(my_map, north_edge, 1) + is_edge_drawn(my_map, east_edge, 0) + is_edge_drawn(my_map, south_edge, 1) + is_edge_drawn(my_map, west_edge, 0);
       sprintf(&my_grid->squares[i][j], "%d", value);
     }
@@ -49,35 +49,38 @@ void grid_remove_values(struct grid* my_grid){
   for(int i=0; i<my_grid->n; i++){
     for(int j=0; j<my_grid->m; j++){
       switch(my_grid->squares[i][j]){
-        case 0:
+        case '0':
           my_grid->squares[i][j] = 'N';
         break;
-        case 1:
+        case '1':
           ones++;
-          if(ones < 3){
+          if(ones == 3){
             my_grid->squares[i][j] = 'N';
           }
-          else{
+          else if(ones > 3){
             ones = 0;
           }
         break;
-        case 2:
+        case '2':
           twos++;
-          if(twos < 2){
+          if(twos == 2){
             my_grid->squares[i][j] = 'N';
           }
-          else{
+          else if(twos > 2){
             twos = 0;
           }
         break;
-        case 3:
+        case '3':
           threes++;
-          if(threes < 4){
+          if(threes == 4){
             my_grid->squares[i][j] = 'N';
           }
-          else{
+          else if(threes > 4){
             threes = 0;
           }
+        break;
+        default:
+          assert(NULL);
         break;
       }
     }

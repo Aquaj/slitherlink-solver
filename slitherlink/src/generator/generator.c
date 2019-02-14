@@ -18,19 +18,11 @@ void draw_loop(struct map* my_map){
 void draw_all_values(struct map* my_map, struct grid* my_grid){
   grid_fill(my_map, my_grid);
 }
+
+void remove_values(struct grid* my_grid){
+  grid_remove_values(my_grid);
+}
 /*
-void remove_values(struct map* my_map){
-  map_remove_values(my_map);
-}
-
-void fill_points(struct map* my_map){
-  map_fill_points(my_map);
-}
-
-void init_edges(struct map* my_map){
-  //map_init_edges(my_map);
-}
-*/
 int main(){
   struct map* my_map = map_init(4,4);
   struct grid* my_grid = grid_init(4,4);
@@ -38,16 +30,17 @@ int main(){
   draw_loop(my_map);
 
   draw_all_values(my_map, my_grid);
+/*
+  for(int i=0; i<my_map->n+1; i++){
+    for(int j=0; j<my_map->m+1; j++){
+      printf("Point %d %d :", i,j);
+      print_bit(my_map->points[i][j]);
+    }
+  }
 
-  /*
-  generate_grid(my_map, my_graph, 0);
+  //remove_values(my_grid);
 
-  remove_values(my_map);
+  print_grid(my_map, my_grid, 0);
 
-  fill_points(my_map);
-
-  //init_edges(my_map);
-
-  generate_grid(my_map, my_graph, 0);
-  */
 }
+*/
