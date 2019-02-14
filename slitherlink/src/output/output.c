@@ -31,8 +31,15 @@ generate a grid of size NxM (default:8x8) */
 void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
   int cpt = 0;
 
+  printf("╔");
+  for(int i = 0 ; i<my_grid->n*3 ; i++)
+    printf("═");
+  printf("╗\n");
+
   for(int i=0 ; i<my_grid->n ; i++){
+    printf("║");
     for(int j=0 ; j<my_grid->m+1 ; j++){
+
       struct coord my_edge;
       my_edge.x = i;
       my_edge.y = j;
@@ -53,9 +60,15 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
         }
       }
     }
+    printf("║");
     printf("\n");
 
   }
+  printf("╚");
+  for(int i = 0 ; i<my_grid->n*3 ; i++)
+    printf("═");
+  printf("╝\n");
+
 
 }
 
