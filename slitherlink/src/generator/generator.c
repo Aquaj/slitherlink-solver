@@ -22,15 +22,17 @@ void draw_all_values(struct map* my_map, struct grid* my_grid){
 void remove_values(struct grid* my_grid){
   grid_remove_values(my_grid);
 }
-/*
+
 int main(){
-  struct map* my_map = map_init(4,4);
-  struct grid* my_grid = grid_init(4,4);
+  int N = 5;
+  int M = 5;
+  struct map* my_map = map_init(N,M);
+  struct grid* my_grid = grid_init(N,M);
 
   draw_loop(my_map);
 
   draw_all_values(my_map, my_grid);
-/*
+
   for(int i=0; i<my_map->n+1; i++){
     for(int j=0; j<my_map->m+1; j++){
       printf("Point %d %d :", i,j);
@@ -43,4 +45,3 @@ int main(){
   print_grid(my_map, my_grid, 0);
 
 }
-*/

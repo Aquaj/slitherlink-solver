@@ -29,9 +29,6 @@ void show_help(){
 generate a grid of size NxM (default:8x8) */
 
 void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
-  char* str_start = "\x1b[7m";
-  char* str_end = "\x1b[0m";
-
   int cpt = 0;
 
   for(int i=0 ; i<my_grid->n ; i++){
