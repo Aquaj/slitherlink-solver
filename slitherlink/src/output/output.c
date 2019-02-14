@@ -32,7 +32,7 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
   int cpt = 0;
 
   printf("╔");
-  for(int i = 0 ; i<my_grid->n*3 ; i++)
+  for(int i = 0 ; i<my_grid->n*4+1 ; i++)
     printf("═");
   printf("╗\n");
 
@@ -47,6 +47,7 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
         cpt++;
       }
       if(j!=my_grid->m){
+        printf("│");
         if(my_grid->squares[i][j] == 'N'){
           if(cpt%2 == 1)
             printf("\x1b[7m _ \x1b[0m");
@@ -58,14 +59,17 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
           if(cpt%2 == 0)
             printf(" %c ", my_grid->squares[i][j]);
         }
+
       }
+
+
     }
-    printf("║");
+    printf("│║");
     printf("\n");
 
   }
   printf("╚");
-  for(int i = 0 ; i<my_grid->n*3 ; i++)
+  for(int i = 0 ; i<my_grid->n*4+1 ; i++)
     printf("═");
   printf("╝\n");
 
