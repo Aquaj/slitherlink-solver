@@ -42,6 +42,6 @@ int main(){
 
   //remove_values(my_grid);
 
-  print_grid(my_map, my_grid, 0);
+  print_grid(my_map, my_grid, 1);
 
 }
