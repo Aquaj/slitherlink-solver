@@ -113,33 +113,35 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
 
 struct coord my_square;
 
-    for(int i = 0 ; i<my_grid->m+1 ; ++i){
-      for(int j = 0 ; j<my_grid->n ; ++j){
+    for(int i = 0 ; i<my_grid->n+1 ; ++i){
+      for(int j = 0 ; j<my_grid->m ; ++j){
         my_square.x = i;
         my_square.y = j;
 
-        struct coord east_edge = get_edge(my_square, EAST);
-        if(is_edge_drawn(my_map, east_edge, 1)){
+        /* horizontal edges */
+        if(is_edge_drawn(my_map, my_square, 1)){
           printf("    _ ");
-        }else if(is_edge_crossed(my_map, east_edge, 1)){
+        }else if(is_edge_crossed(my_map, my_square, 1)){
             printf("    x ");
         }else{
-          printf("    . ");
+          printf("      ");
         }
 
       }
       printf("\n");
       for(int k = 0 ; k < my_grid->m+1 ; k++){
+        my_square.y = k;
 
         if(i!=my_grid->m){
-          struct coord south_edge = get_edge(my_square, SOUTH);
-          if(is_edge_drawn(my_map, south_edge, 1)){
+          /* vertical edges */
+          if(is_edge_drawn(my_map, my_square, 0)){
             printf(" | ");
-          }else if(is_edge_crossed(my_map, south_edge, 1)){
+          }else if(is_edge_crossed(my_map, my_square, 0)){
               printf(" x ");
           }else{
-            printf(" : ");
+            printf("   ");
           }
+          /* calue of the square */
           printf(" %c ", my_grid->squares[i][k]);
 
         }

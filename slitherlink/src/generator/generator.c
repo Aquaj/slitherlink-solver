@@ -22,10 +22,10 @@ void draw_all_values(struct map* my_map, struct grid* my_grid){
 void remove_values(struct grid* my_grid){
   grid_remove_values(my_grid);
 }
-
+/*
 int main(){
-  int N = 5;
-  int M = 5;
+  int N = 7;
+  int M = 7;
   struct map* my_map = map_init(N,M);
   struct grid* my_grid = grid_init(N,M);
 
@@ -45,3 +45,4 @@ int main(){
   print_grid(my_map, my_grid, 1);
 
 }
+*/

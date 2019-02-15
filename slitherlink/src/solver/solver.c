@@ -119,6 +119,8 @@ int main(){
     }
   }
 
+  print_grid(my_map, my_grid, 1);
+
   solve(my_map, my_grid);
 
   for(int i=0; i<my_map->n+1; i++){
@@ -127,4 +129,6 @@ int main(){
       print_bit(my_map->points[i][j]);
     }
   }
+
+  print_grid(my_map, my_grid, 1);
 }
