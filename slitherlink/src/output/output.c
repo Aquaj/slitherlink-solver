@@ -33,85 +33,69 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
 
   printf("╔");
   for(int i = 0 ; i<my_grid->n*4+1 ; i++)
-    printf("═");
+  printf("═");
   printf("╗\n");
 
   printf("║┌");
   for(int i = 0 ; i<my_grid->n*4-1 ; i++)
-    printf("─");
+  printf("─");
   printf("┐║\n");
-
 
   for(int i=0 ; i<my_grid->n ; i++){
     printf("║");
     for(int j=0 ; j<my_grid->m+1 ; j++){
-
       struct coord my_edge;
       my_edge.x = i;
       my_edge.y = j;
-      if(is_edge_drawn(my_map, my_edge, 0)){
+      if(is_edge_drawn(my_map, my_edge, 0))
         cpt++;
-      }
       if(j!=my_grid->m){
         printf("│");
         if(my_grid->squares[i][j] == 'N'){
           if(cpt%2 == 1)
-            printf("\x1b[7m _ \x1b[0m");
+          printf("\x1b[7m _ \x1b[0m");
           if(cpt%2 == 0)
-            printf(" _ ");
+          printf(" _ ");
         } else {
           if(cpt%2 == 1)
-            printf("\x1b[7m %c \x1b[0m", my_grid->squares[i][j]);
+          printf("\x1b[7m %c \x1b[0m", my_grid->squares[i][j]);
           if(cpt%2 == 0)
-            printf(" %c ", my_grid->squares[i][j]);
+          printf(" %c ", my_grid->squares[i][j]);
         }
-
-
       }
-
-
-
     }
 
-      printf("│║");
+    printf("│║");
+    printf("\n");
+    printf("║├");
+    for(int k = 0; k < my_grid->n*5-6 ; k++){
+      if(k!=0 && k%4==0 && k != my_grid->n*5-6 )
+      printf("┼");
+      else if (k!=0)
+      printf("─");
+    }
 
-      printf("\n");
-      printf("║├");
-      for(int k = 0; k < my_grid->n*5-6 ; k++){
-        if(k!=0 && k%4==0 && k != my_grid->n*5-6 )
-          printf("┼");
-        else if (k!=0)
-          printf("─");
-        }
-      printf("─┤║");
-      printf("\n");
-
-
-
-
+    printf("─┤║");
+    printf("\n");
   }
 
   printf("║└");
-  for(int i = 0 ; i<my_grid->n*4-1 ; i++)
-  if(i%4==0 && i!=0)
-    printf("┴");
-  else if (i!=0)
-    printf("─");
+  for(int i = 0 ; i<my_grid->n*4-1 ; i++){
+    if(i%4==0 && i!=0)
+      printf("┴");
+    else if (i!=0)
+      printf("─");
+  }
   printf("─┘║\n");
 
 
   printf("╚");
   for(int i = 0 ; i<my_grid->n*4+1 ; i++)
-    printf("═");
+  printf("═");
   printf("╝\n");
 
-
-
-
   if(_verbose == 1){
-    //printf("┌");
-
-struct coord my_square;
+    struct coord my_square;
 
     for(int i = 0 ; i<my_grid->n+1 ; ++i){
       for(int j = 0 ; j<my_grid->m ; ++j){
@@ -122,11 +106,10 @@ struct coord my_square;
         if(is_edge_drawn(my_map, my_square, 1)){
           printf("    _ ");
         }else if(is_edge_crossed(my_map, my_square, 1)){
-            printf("    x ");
+          printf("    x ");
         }else{
           printf("      ");
         }
-
       }
       printf("\n");
       for(int k = 0 ; k < my_grid->m+1 ; k++){
@@ -137,22 +120,17 @@ struct coord my_square;
           if(is_edge_drawn(my_map, my_square, 0)){
             printf(" | ");
           }else if(is_edge_crossed(my_map, my_square, 0)){
-              printf(" x ");
+            printf(" x ");
           }else{
             printf("   ");
           }
-          /* calue of the square */
+          /* value of the square */
           printf(" %c ", my_grid->squares[i][k]);
-
         }
-
       }
       printf("\n");
     }
-    //printf("┐\n");
   }
-
-
 }
 
 /* option -a,--all
