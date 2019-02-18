@@ -7,14 +7,40 @@
 #include "generator/loop.h"
 #include "solver/solver.h"
 
+
+
+
+
+
+
+/* to be done, had to leave cremi*/
+int * pouet(int argc, char ** argv){
+  static int array [2];
+  array[0] = 5;
+  array[1] = 5;
+  return array;
+  }
+
+
+
+
+
+
+
+
+  // char _short_option = argv[1][1];
+  // char _long_option = argv[1][2];
+  // if (_short_option == 'g' || (_short_option == '-' && _long_option == 'g'))
+  //   return EXIT_SUCCESS;
+
 int main(int argc, char ** argv){
   int _verbose = 0;
 
+  /* for verbose*/
   for (int i = 0; i<argc;++i){
     if  (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose"))
       _verbose = 1;
   }
-
 
   /* outputs help */
   if (argc==1 || !strcmp(argv[1], "-h")){
@@ -63,50 +89,9 @@ int main(int argc, char ** argv){
     }
     //remove_values(my_grid);
     print_grid(my_map, my_grid, 1);
+
+
     return EXIT_SUCCESS;
   }
 
 }
-
-
-/*
-int main(int argc, char ** argv){
-
-
-
-    if (argc != 1){
-      char _short_option = argv[1][1];
-      char _long_option = argv[1][2];
-      if (_short_option == 'g' ||
-      (_short_option == '-' && _long_option == 'g')){
-        generate_grid(_verbose);
-        return EXIT_SUCCESS;
-      }
-
-
-
-      if (!strcmp(argv[1], "-u") ||
-      !strcmp(argv[1], "--unique")){
-        generate_grid_unique(_verbose);
-        return EXIT_SUCCESS;
-      }
-
-
-
-
-
-
-    }
-
-  }
-}
-
-
-
-
-if (N<1 || M<1){
-  printf("The size of the grid must be over 1x1.\n");
-  return 1;
-}
-}
-*/
