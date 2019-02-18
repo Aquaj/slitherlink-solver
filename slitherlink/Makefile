@@ -14,13 +14,11 @@ SOL=src/solver
 #all:
 
 slitherlink:
-	cc src/slitherlink.c -o slitherlink
+	$(CC) src/slitherlink.c $(GEN)/generator.c $(STR)/*.c -o $@.out
 
-generator:
-	cc $(GEN)/generator.c $(STR)/map.c $(STR)/point.c $(STR)/grid.c $(STR)/edge.c $(OUT)/output.c -o generator.out
-
+# this need to be removed later when the test on solver are done
 solver:
-	cc $(GEN)/generator.c $(STR)/map.c $(STR)/point.c $(STR)/grid.c $(STR)/edge.c $(OUT)/output.c $(SOL)/solver.c -o solver.out
+	$(CC) $(GEN)/generator.c $(STR)/*.c $(OUT)/output.c $(SOL)/solver.c -o $@.out
 
 clean:
-	rm *.out
+	@rm -fr *.out .Makefile.swp
