@@ -1,8 +1,8 @@
 CC=gcc
-GEN=src/generator
+GENERATOR=src/generator/generator.c
 STR=src/struct
-OUT=src/output
-SOL=src/solver
+OUTPUT=src/output/output.c
+SOLVER=src/solver/solver.c
 #CFLAGS=
 #DEPS=
 #%.o: %.c $(DEPS)
@@ -14,11 +14,11 @@ SOL=src/solver
 #all:
 
 slitherlink:
-	$(CC) src/slitherlink.c $(GEN)/generator.c $(STR)/*.c -o $@.out
+	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) src/slitherlink.c -o $@.out
 
 # this need to be removed later when the test on solver are done
 solver:
-	$(CC) $(GEN)/generator.c $(STR)/*.c $(OUT)/output.c $(SOL)/solver.c -o $@.out
+	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) $(SOLVER) -o $@.out
 
 clean:
 	@rm -fr *.out .Makefile.swp
