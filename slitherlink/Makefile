@@ -13,6 +13,9 @@ SOLVER=src/solver/solver.c
 
 #all:
 
+default:
+	@echo "Try 'make slitherlink' or 'make solver'. Stop."
+
 slitherlink:
 	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) src/slitherlink.c -o $@.out
 
