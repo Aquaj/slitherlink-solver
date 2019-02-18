@@ -1,4 +1,8 @@
 CC=gcc
+GEN=src/generator
+STR=src/struct
+OUT=src/output
+SOL=src/solver
 #CFLAGS=
 #DEPS=
 #%.o: %.c $(DEPS)
@@ -9,13 +13,14 @@ CC=gcc
 
 #all:
 
+slitherlink:
+	cc src/slitherlink.c -o slitherlink
+
 generator:
-	cc src/generator/generator.c src/struct/map.c src/struct/point.c src/struct/grid.c src/struct/edge.c src/output/output.c -o generator.out
+	cc $(GEN)/generator.c $(STR)/map.c $(STR)/point.c $(STR)/grid.c $(STR)/edge.c $(OUT)/output.c -o generator.out
 
 solver:
-	cc src/generator/generator.c src/struct/map.c src/struct/point.c src/struct/grid.c src/struct/edge.c src/output/output.c src/solver/solver.c -o solver.out
+	cc $(GEN)/generator.c $(STR)/map.c $(STR)/point.c $(STR)/grid.c $(STR)/edge.c $(OUT)/output.c $(SOL)/solver.c -o solver.out
 
-output:
-	cc src/generator/generator.c src/generator/loop.c src/struct/map.c src/struct/graph.c src/annexe/tsp.c src/struct/edge.c src/output/output.c
 clean:
 	rm *.out
