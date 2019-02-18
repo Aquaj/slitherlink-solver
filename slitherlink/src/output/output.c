@@ -27,7 +27,6 @@ void show_help(){
 
 /* option -g[NxM],--generate[=NxM]
 generate a grid of size NxM (default:8x8) */
-
 void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
   int cpt = 0;
 
@@ -136,34 +135,33 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
 /* option -a,--all
 search for all possible solutions */
 void search_all_possible_solutions(int _verbose){
+  printf("Searching all possible solutions...\n");
   //TODO
 }
 
 /* option -u,--unique
 generate a grid with unique solution*/
 void generate_grid_unique(int _verbose){
+  printf("Generating a grid with a unique solution...\n");
   //TODO
 }
 
 /* option -o FILE,--output FILE
 write result to FILE */
 void write_result_to_file(){
+  printf("Writing result to file...\n");
   //TODO
 }
+
 /* option -v,--verbose
 verbose output */
 void verbose_output(){
+  printf("Displaying with verbose.\n");
   //TODO
 }
 
+/* option -V
+outputs version*/
 void show_version(){
   printf("Version : %f\n", VERSION);
 }
-
-
-
-/* A FAIRE
-
-void show_board(){
-
-}*/
