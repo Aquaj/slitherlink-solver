@@ -1,7 +1,6 @@
 #ifndef ___map_h___
 #define ___map_h___
 
-#include "../generator/loop.h"
 #include "grid.h"
 #include "point.h"
 
