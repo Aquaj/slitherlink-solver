@@ -35,6 +35,17 @@ void set_square_points(struct map* my_map, struct coord my_square_coord, int my_
   set_point(&my_map->points[i+1][j], UR, set);
 }
 */
+
+void set_empty_point(struct map* my_map, struct coord my_point, enum orientation my_ori){
+  struct coord next = neighbor(my_map, my_point, my_ori);
+  enum orientation opposite = opposite_orientation(my_ori);
+
+  assert(next.x != -1);
+
+  set_point(my_map, my_point, my_ori, 2);
+  set_point(my_map, next, opposite, 2);
+}
+
 void set_drawn_point(struct map* my_map, struct coord my_point, enum orientation my_ori){
   struct coord next = neighbor(my_map, my_point, my_ori);
   enum orientation opposite = opposite_orientation(my_ori);
@@ -61,8 +72,13 @@ void set_point(struct map* my_map, struct coord my_point, enum orientation my_or
   int i = my_point.x;
   int j = my_point.y;
 
-  char aff = 0x02; // 10 CROSSED
-  if(drawn){
+  char mask;
+  char aff = 0x00; // 00 EMPTY
+
+  if(drawn == 0){
+    aff = 0x02; // 10 CROSSED
+  }
+  else if(drawn == 1){
     aff = 0x03; // 11 DRAWN
   }
 
@@ -70,24 +86,32 @@ void set_point(struct map* my_map, struct coord my_point, enum orientation my_or
 
   switch(my_ori){
     case NORTH:
+      mask = 0x03;
     break;
     case EAST:
+      mask = 0x0C;
       shift = 2;
     break;
     case SOUTH:
+      mask = 0x30;
       shift = 4;
     break;
     case WEST:
+      mask = 0xC0;
       shift = 6;
     break;
     default:
       assert(NULL);
     break;
   }
+
+  my_map->points[i][j] = my_map->points[i][j] & ~mask;
+
   char tmp = my_map->points[i][j] >> shift;
   tmp = tmp | aff;
   tmp = tmp << shift;
   my_map->points[i][j] = my_map->points[i][j] | tmp;
+
 }
 
 int is_drawn_point(struct map* my_map, struct coord my_point, enum orientation my_ori){

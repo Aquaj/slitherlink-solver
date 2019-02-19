@@ -124,7 +124,12 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
             printf("   ");
           }
           /* value of the square */
-          printf(" %c ", my_grid->squares[i][k]);
+          if(my_grid->squares[i][k] == 'N'){
+            printf("   ");
+          }
+          else{
+            printf(" %c ", my_grid->squares[i][k]);
+          }
         }
       }
       printf("\n");

@@ -21,6 +21,7 @@ enum orientation;
 //void set_square_points(struct map* my_map, struct coord my_square_coord, int my_square_value);
 
 void set_point(struct map* my_map, struct coord my_point, enum orientation my_ori, int drawn);
+void set_empty_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
 void set_drawn_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
 void set_crossed_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
 

@@ -2,7 +2,6 @@
 #define ___generator_h___
 
 #include "../struct/map.h"
-#include "loop.h"
 #include "../output/output.h"
 
 void draw_loop(struct map* my_map);
