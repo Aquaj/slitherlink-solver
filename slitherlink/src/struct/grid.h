@@ -4,6 +4,7 @@
 #include "map.h"
 #include "edge.h"
 
+struct map;
 struct coord;
 enum orientation;
 

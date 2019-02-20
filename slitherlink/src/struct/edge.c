@@ -51,3 +51,76 @@ struct coord get_edge(struct coord my_square, enum orientation my_ori){
 
   return my_edge;
 }
+
+struct coord get_square(struct coord my_point, enum orientation my_first_ori, enum orientation my_second_ori){
+  struct coord my_square;
+  int north_east = 0;
+  int north_west = 0;
+  int south_east = 0;
+  int south_west = 0;
+
+  switch(my_first_ori){
+    case NORTH:
+      north_east++;
+      north_west++;
+    break;
+    case EAST:
+      north_east++;
+      south_east++;
+    break;
+    case SOUTH:
+      south_east++;
+      south_west++;
+    break;
+    case WEST:
+      north_west++;
+      south_west++;
+    break;
+    default:
+      assert(NULL);
+    break;
+  }
+
+  switch(my_second_ori){
+    case NORTH:
+      north_east++;
+      north_west++;
+    break;
+    case EAST:
+      north_east++;
+      south_east++;
+    break;
+    case SOUTH:
+      south_east++;
+      south_west++;
+    break;
+    case WEST:
+      north_west++;
+      south_west++;
+    break;
+    default:
+      assert(NULL);
+    break;
+  }
+
+  if(north_east == 2){
+    my_square.x = my_point.x-1;
+    my_square.y = my_point.y;
+  }
+  else if(south_east == 2){
+    my_square.x = my_point.x;
+    my_square.y = my_point.y;
+  }
+  else if(south_west == 2){
+    my_square.x = my_point.x;
+    my_square.y = my_point.y-1;
+  }
+  else if(north_west == 2){
+    my_square.x = my_point.x-1;
+    my_square.y = my_point.y-1;
+  }
+  else{
+    assert(NULL);
+  }
+  return my_square;
+}

@@ -27,91 +27,74 @@ void show_help(){
 
 /* option -g[NxM],--generate[=NxM]
 generate a grid of size NxM (default:8x8) */
-
 void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
   int cpt = 0;
 
   printf("╔");
   for(int i = 0 ; i<my_grid->n*4+1 ; i++)
-    printf("═");
+  printf("═");
   printf("╗\n");
 
   printf("║┌");
   for(int i = 0 ; i<my_grid->n*4-1 ; i++)
-    printf("─");
+  printf("─");
   printf("┐║\n");
-
 
   for(int i=0 ; i<my_grid->n ; i++){
     printf("║");
     for(int j=0 ; j<my_grid->m+1 ; j++){
-
       struct coord my_edge;
       my_edge.x = i;
       my_edge.y = j;
-      if(is_edge_drawn(my_map, my_edge, 0)){
+      if(is_edge_drawn(my_map, my_edge, 0))
         cpt++;
-      }
       if(j!=my_grid->m){
         printf("│");
         if(my_grid->squares[i][j] == 'N'){
           if(cpt%2 == 1)
-            printf("\x1b[7m _ \x1b[0m");
+          printf("\x1b[7m _ \x1b[0m");
           if(cpt%2 == 0)
-            printf(" _ ");
+          printf(" _ ");
         } else {
           if(cpt%2 == 1)
-            printf("\x1b[7m %c \x1b[0m", my_grid->squares[i][j]);
+          printf("\x1b[7m %c \x1b[0m", my_grid->squares[i][j]);
           if(cpt%2 == 0)
-            printf(" %c ", my_grid->squares[i][j]);
+          printf(" %c ", my_grid->squares[i][j]);
         }
-
-
       }
-
-
-
     }
 
-      printf("│║");
+    printf("│║");
+    printf("\n");
+    printf("║├");
+    for(int k = 0; k < my_grid->n*5-6 ; k++){
+      if(k!=0 && k%4==0 && k != my_grid->n*5-6 )
+      printf("┼");
+      else if (k!=0)
+      printf("─");
+    }
 
-      printf("\n");
-      printf("║├");
-      for(int k = 0; k < my_grid->n*5-6 ; k++){
-        if(k!=0 && k%4==0 && k != my_grid->n*5-6 )
-          printf("┼");
-        else if (k!=0)
-          printf("─");
-        }
-      printf("─┤║");
-      printf("\n");
-
-
-
-
+    printf("─┤║");
+    printf("\n");
   }
 
   printf("║└");
-  for(int i = 0 ; i<my_grid->n*4-1 ; i++)
-  if(i%4==0 && i!=0)
-    printf("┴");
-  else if (i!=0)
-    printf("─");
+  for(int i = 0 ; i<my_grid->n*4-1 ; i++){
+    if(i%4==0 && i!=0)
+      printf("┴");
+    else if (i!=0)
+      printf("─");
+  }
   printf("─┘║\n");
 
 
   printf("╚");
   for(int i = 0 ; i<my_grid->n*4+1 ; i++)
-    printf("═");
+  printf("═");
   printf("╝\n");
 
-
-
-
   if(_verbose == 1){
-    //printf("┌");
-
-struct coord my_square;
+    struct coord my_square;
 
     for(int i = 0 ; i<my_grid->n+1 ; ++i){
       for(int j = 0 ; j<my_grid->m ; ++j){
@@ -122,11 +105,10 @@ struct coord my_square;
         if(is_edge_drawn(my_map, my_square, 1)){
           printf("    _ ");
         }else if(is_edge_crossed(my_map, my_square, 1)){
-            printf("    x ");
+          printf("    x ");
         }else{
           printf("      ");
         }
-
       }
       printf("\n");
       for(int k = 0 ; k < my_grid->m+1 ; k++){
@@ -137,121 +119,54 @@ struct coord my_square;
           if(is_edge_drawn(my_map, my_square, 0)){
             printf(" | ");
           }else if(is_edge_crossed(my_map, my_square, 0)){
-              printf(" x ");
+            printf(" x ");
           }else{
             printf("   ");
           }
-          /* calue of the square */
-          printf(" %c ", my_grid->squares[i][k]);
-
+          /* value of the square */
+          if(my_grid->squares[i][k] == 'N'){
+            printf("   ");
+          }
+          else{
+            printf(" %c ", my_grid->squares[i][k]);
+          }
         }
-
       }
       printf("\n");
     }
-    //printf("┐\n");
   }
-
-
 }
 
 /* option -a,--all
 search for all possible solutions */
 void search_all_possible_solutions(int _verbose){
+  printf("Searching all possible solutions...\n");
   //TODO
 }
 
 /* option -u,--unique
 generate a grid with unique solution*/
 void generate_grid_unique(int _verbose){
+  printf("Generating a grid with a unique solution...\n");
   //TODO
 }
 
 /* option -o FILE,--output FILE
 write result to FILE */
 void write_result_to_file(){
+  printf("Writing result to file...\n");
   //TODO
 }
+
 /* option -v,--verbose
 verbose output */
 void verbose_output(){
+  printf("Displaying with verbose.\n");
   //TODO
 }
 
+/* option -V
+outputs version*/
 void show_version(){
   printf("Version : %f\n", VERSION);
 }
-
-
-
-/* A FAIRE
-
-void show_board(){
-
-}*/
-
-
-// Completer .h
-// Move main to output_test.c
-/*
-int main(int argc, char ** argv){
-  int _verbose = 0;
-
-  for (int i = 0; i<argc;++i){
-    if  (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")){
-      _verbose = 1;
-    }
-
-    if (argc==1 || !strcmp(argv[1], "-h")){
-      show_help();
-      return EXIT_SUCCESS;
-    }
-
-    if (!strcmp(argv[1], "-V") || !strcmp(argv[1], "--version")){
-      show_version();
-      return EXIT_SUCCESS;
-    }
-    if (argc != 1){
-      char _short_option = argv[1][1];
-      char _long_option = argv[1][2];
-      if (_short_option == 'g' ||
-      (_short_option == '-' && _long_option == 'g')){
-        generate_grid(_verbose);
-        return EXIT_SUCCESS;
-      }
-
-      if (!strcmp(argv[1], "-a") ||
-      !strcmp(argv[1], "--all")){
-        search_all_possible_solutions(_verbose);
-        return EXIT_SUCCESS;
-      }
-
-      if (!strcmp(argv[1], "-u") ||
-      !strcmp(argv[1], "--unique")){
-        generate_grid_unique(_verbose);
-        return EXIT_SUCCESS;
-      }
-
-
-
-
-
-
-    }
-
-  }
-
-   if (!strcmp(argv[i], "-g[NxM]") || !strcmp(argv[i], "--version")){
-  generate_grid();
-  return EXIT_SUCCESS;
-}
-
-
-
-
-if (N<1 || M<1){
-  printf("The size of the grid must be over 1x1.\n");
-  return 1;
-}
-}
-*/

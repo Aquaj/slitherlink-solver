@@ -1,4 +1,8 @@
 CC=gcc
+GENERATOR=src/generator/generator.c
+STR=src/struct
+OUTPUT=src/output/output.c
+SOLVER=src/solver/solver.c
 #CFLAGS=
 #DEPS=
 #%.o: %.c $(DEPS)
@@ -7,15 +11,19 @@ CC=gcc
 #
 #.PHONY: clean
 
-#all:
+all: slitherlink solver
 
-generator:
-	cc src/generator/generator.c src/struct/map.c src/struct/point.c src/struct/grid.c src/struct/edge.c src/output/output.c -o generator.out
+default:
+	@echo "Try 'make slitherlink' or 'make solver'. Stop."
 
+slitherlink:
+	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) src/slitherlink.c -o $@.out
+	@echo "Executable slitherlink.out generated."
+
+# this need to be removed later when the test on solver are done
 solver:
-	cc src/generator/generator.c src/struct/map.c src/struct/point.c src/struct/grid.c src/struct/edge.c src/output/output.c src/solver/solver.c -o solver.out
+	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) $(SOLVER) -o $@.out
+	@echo "Executable solver.out generated."
 
-output:
-	cc src/generator/generator.c src/generator/loop.c src/struct/map.c src/struct/graph.c src/annexe/tsp.c src/struct/edge.c src/output/output.c
 clean:
-	rm *.out
+	@rm -fr *.out .Makefile.swp
