@@ -80,27 +80,7 @@ struct coord neighbor(struct map* my_map, struct coord my_point, enum orientatio
     break;
   }
 }
-/*
-void map_fill(struct map* my_map, struct graph* my_graph){
-  generate_loop(my_map, my_graph);
 
-  graph_print(my_graph);
-}
-*/
-/*
-// Fill points from parsed grid
-void map_fill_points(struct map* my_map, struct grid* my_grid){
-  struct coord my_square_coord;
-  for(int i=0; i<my_map->n; i++){
-    for(int j=0; j<my_map->m; j++){
-      my_square_coord.x = i;
-      my_square_coord.y = j;
-      int my_square_value = my_map->squares[i][j].value;
-      set_square_points(my_map, my_square_coord, my_square_value);
-    }
-  }
-}
-*/
 void map_draw_line(struct map* my_map, struct coord first, struct coord second){
   int x = first.x > second.x;
   int y = first.y > second.y;

@@ -17,3 +17,6 @@ make Solver
 ## Test
 
 make Solver_Test
+
+# Structure Tests
+make Edge_Test
