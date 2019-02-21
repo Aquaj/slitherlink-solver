@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <time.h>
 #include "map.h"
+#include "../output/output.h"
 
 void print_bit(char a){
   for (int i = 0; i < 8; i++) {
