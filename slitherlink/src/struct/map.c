@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <time.h>
 #include "map.h"
+
+void print_bit(char a){
+  for (int i = 0; i < 8; i++) {
+      printf("%d", !!((a << i) & 0x80));
+  }
+  printf("\n");
+}
 
 struct map* map_init(int n, int m){
   struct map* my_map = malloc(sizeof(struct map));
@@ -14,6 +22,169 @@ struct map* map_init(int n, int m){
   my_map->m = m;
 
   return my_map;
+}
+
+void get_border_squares(struct map *my_map, char **border_squares){
+  for(int i=0; i<my_map->n; i++){
+    for(int j=0; j<my_map->m; j++){
+      if(i==0 || i==my_map->n-1 || j==0 || j==my_map->m-1){
+        border_squares[i][j] = 0x01;
+      }
+      else{
+        border_squares[i][j] = 0x00;
+      }
+    }
+  }
+}
+
+struct coord get_random_square(char **border_squares, int n, int m){
+  int x,y;
+  srand(time(0));
+  struct coord my_square;
+  int border_size = 0;
+
+  for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+      border_size += (border_squares[i][j] == 0x01);
+    }
+  }
+
+  int square_num = rand() % border_size;
+  printf("Square Num : %d\n", square_num);
+
+  int count = 0;
+  for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+      if(border_squares[i][j] == 0x01){
+        count++;
+        if(count > square_num){
+          my_square.x = i;
+          my_square.y = j;
+          return my_square;
+        }
+      }
+    }
+  }
+}
+
+void map_remove_square(struct map *my_map, struct coord removed_square){
+  struct coord my_edge;
+  for(int i=0; i<4; i++){
+    my_edge = get_edge(removed_square, i);
+    if(is_edge_drawn(my_map, my_edge, (i+1)%2)){
+      empty_edge(my_map, my_edge, (i+1)%2);
+    }
+    else if(is_edge_empty(my_map, my_edge, (i+1)%2)){
+      draw_edge(my_map, my_edge, (i+1)%2);
+    }
+  }
+}
+
+int is_valid_border(struct map* my_map, struct coord my_square){
+  struct coord my_point, my_edge;
+  int edges=0;
+  map_remove_square(my_map, my_square);
+
+  // CASE | 2 |
+  for(int i=0; i<4; i++){
+    my_edge = get_edge(my_square, i);
+    edges += is_edge_drawn(my_map, my_edge, (i+1)%2);
+  }
+  if(edges == 2){
+    struct coord first;
+    struct coord second;
+    first = get_edge(my_square, NORTH);
+    second = get_edge(my_square, SOUTH);
+    if(is_edge_drawn(my_map, first, 1) && is_edge_drawn(my_map, second, 1)){
+      map_remove_square(my_map, my_square);
+      return 0;
+    }
+    first = get_edge(my_square, EAST);
+    second = get_edge(my_square, WEST);
+    if(is_edge_drawn(my_map, first, 0) && is_edge_drawn(my_map, second, 0)){
+      map_remove_square(my_map, my_square);
+      return 0;
+    }
+  }
+
+  // All other cases
+  edges = 0;
+  for(int i=0; i<4; i++){
+    my_point = get_point_frm_square(my_square, i);
+    for(int j=0; j<4; j++){
+      edges+=is_drawn_point(my_map, my_point, j);
+    }
+    if(edges > 2){
+      map_remove_square(my_map, my_square);
+      return 0;
+    }
+    edges = 0;
+  }
+  map_remove_square(my_map, my_square);
+  return 1;
+}
+
+void update_border(struct map* my_map, char **border_squares, struct coord removed_square){
+  int x = removed_square.x;
+  int y = removed_square.y;
+  struct coord new_square;
+  int nx, ny;
+  border_squares[x][y] = 0x03;
+  printf("Removed %d %d : ", x, y);
+  print_bit(border_squares[x][y]);
+
+  for(int i=0; i<4; i++){
+    for(int j=i; j<4; j++){
+      if(i==j || ((j-i)%2)){
+        new_square = get_square_frm_square(removed_square, i, j, my_map->n, my_map->m);
+        nx = new_square.x;
+        ny = new_square.y;
+        if(nx != -1 && border_squares[nx][ny] != 0x03){
+          border_squares[nx][ny] = 0x00;
+          if(is_valid_border(my_map, new_square)){
+            printf("Is Valid\n");
+            border_squares[nx][ny] = 0x01;
+          }
+          printf("Affected %d %d\n", nx, ny);
+          print_bit(border_squares[nx][ny]);
+        }
+      }
+    }
+  }
+}
+
+void map_loop_distortion(struct map* my_map, struct grid *my_grid, int iter){
+  int n = my_map->n;
+  int m = my_map->m;
+  char **border_squares = calloc(n,sizeof(char *));
+  for(int i=0; i<m; i++){
+      border_squares[i] = calloc(m, sizeof(char));
+  }
+  struct coord removed_square;
+  get_border_squares(my_map, border_squares);
+  grid_fill(my_map, my_grid);
+  print_grid(my_map, my_grid, 1);
+  for(int j=0; j<n; j++){
+    for(int k=0; k<m; k++){
+      if(border_squares[j][k]){
+        printf("First Square : %d %d\n", j, k);
+      }
+    }
+  }
+  for(int i=0; i<iter; i++){
+    removed_square = get_random_square(border_squares, n, m);
+    map_remove_square(my_map, removed_square);
+    update_border(my_map, border_squares, removed_square);
+    grid_fill(my_map, my_grid);
+    print_grid(my_map, my_grid, 1);
+    for(int j=0; j<n; j++){
+      for(int k=0; k<m; k++){
+        if(border_squares[j][k] == 0x01){
+          printf("Square : %d %d\n", j, k);
+        }
+      }
+    }
+  }
 }
 
 enum orientation opposite_orientation(enum orientation my_ori){

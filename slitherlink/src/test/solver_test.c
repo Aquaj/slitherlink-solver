@@ -32,13 +32,11 @@ int main(){
   draw_all_values(my_map, my_grid);
   print_grid(my_map, my_grid, 1);
 
-  remove_values(my_grid);
+  //remove_values(my_grid);
+
+  solve(my_map, my_grid);
   print_grid(my_map, my_grid, 1);
-
-  my_map = map_init(4,4);
-  print_grid(my_map, my_grid, 0);
-  //solve(my_map, my_grid);
-
+/*
   for(int i=0; i<my_map->n+1; i++){
     for(int j=0; j<my_map->m+1; j++){
       printf("Point %d %d :", i,j);
@@ -48,6 +46,5 @@ int main(){
 
   char mask = 0x03;
   print_bit(~mask);
-
-  //print_grid(my_map, my_grid, 1);
+*/
 }
