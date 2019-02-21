@@ -15,8 +15,8 @@
 /* to be done, had to leave cremi*/
 int * pouet(int argc, char ** argv){
   static int array [2];
-  array[0] = 5;
-  array[1] = 5;
+  array[0] = 7;
+  array[1] = 7;
   return array;
   }
 
@@ -66,8 +66,8 @@ int main(int argc, char ** argv){
   }
 
   if (!strcmp(argv[1], "-g")){
-    int N = 7;
-    int M = 7;
+    int N = 10;
+    int M = 10;
 
     if (N<2 || M<2){
       printf("The size of the grid must be over 1x1.\n");
@@ -76,9 +76,9 @@ int main(int argc, char ** argv){
     struct map* my_map = map_init(N,M);
     struct grid* my_grid = grid_init(N,M);
 
-    draw_loop(my_map);
+    draw_loop(my_map, my_grid);
 
-    draw_all_values(my_map, my_grid);
+    //removed_square_all_values(my_map, my_grid);
 
     for(int i=0; i<my_map->n+1; i++){
       for(int j=0; j<my_map->m+1; j++){

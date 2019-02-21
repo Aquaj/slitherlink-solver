@@ -68,8 +68,8 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
     printf("\n");
     if(i!=my_grid->n-1){
       printf("║├");
-      for(int k = 0; k < my_grid->n*5-5 ; k++){
-        if(k!=0 && k%4==0 && k != my_grid->n*5-6 )
+      for(int k = 0; k < my_grid->n*4-1; k++){
+        if(k!=0 && k%4==0 && k != my_grid->n*4 )
         printf("┼");
         else if (k!=0)
         printf("─");
