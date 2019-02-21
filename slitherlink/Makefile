@@ -12,24 +12,28 @@ TST=src/test
 #
 #.PHONY: clean
 
-all: slitherlink solver
-
 default:
-	@echo "Try 'make slitherlink' or 'make solver'. Stop."
+	@echo "Avalaible options :"
+	@echo "make slitherlink -> generates main executable."
+	@echo "make test -> generates all tests avalaible."
+	@echo "make <name_test> -> generates name_test test. (Avalaible : solver_test, generator_test, edge_test)"
 
-#Slitherlink:
-#	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) src/slitherlink.c -o $@.out
-#	@echo "Executable" $@.out "generated."
+test: solver_test generator_test edge_test
+	@echo "Generated all tests' executables."
 
-Solver_Test:
+slitherlink:
+	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) src/slitherlink.c -o $@.out
+	@echo "Executable" $@.out "generated."
+
+solver_test:
 	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) $(SOLVER) $(TST)/solver_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
-Generator_Test:
+generator_test:
 	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) $(TST)/generator_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
-Edge_Test:
+edge_test:
 	$(CC) $(STR)/edge.c $(STR)/map.c $(STR)/point.c $(TST)/edge_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
