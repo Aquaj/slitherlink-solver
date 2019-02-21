@@ -34,7 +34,7 @@ generator_test:
 	@echo "Executable" $@.out "generated."
 
 edge_test:
-	$(CC) $(STR)/edge.c $(STR)/map.c $(STR)/point.c $(TST)/edge_test.c -o $@.out
+	$(CC) $(OUTPUT) $(STR)/*.c $(TST)/edge_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
 clean:

@@ -2,6 +2,8 @@
 #include <assert.h>
 
 #include "../struct/edge.h"
+#include "../output/output.h"
+#include "../struct/grid.h"
 
 int main(){
   printf("___Edge Tests___ : .........................");
@@ -23,7 +25,7 @@ int main(){
       assert(is_edge_crossed(my_map, my_edge, 0));
     }
 
-    my_square = get_square(my_point, i, (i+1)%4);
+    my_square = get_square_frm_point(my_point, i, (i+1)%4);
     extracted_edge = get_edge(my_square, ((i+1) + 2)% 4);
     assert(my_edge.x == extracted_edge.x);
     assert(my_edge.y == extracted_edge.y);

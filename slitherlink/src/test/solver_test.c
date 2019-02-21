@@ -7,7 +7,7 @@ int main(){
   struct map* my_map = map_init(4,4);
   struct grid* my_grid = grid_init(4,4);
 
-  draw_loop(my_map);
+  draw_loop(my_map, my_grid);
 
   draw_all_values(my_map, my_grid);
 
