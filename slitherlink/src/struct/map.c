@@ -51,7 +51,6 @@ struct coord get_random_square(char **border_squares, int n, int m){
   }
 
   int square_num = rand() % border_size;
-  printf("Square Num : %d\n", square_num);
 
   int count = 0;
   for(int i=0; i<n; i++){
@@ -131,8 +130,6 @@ void update_border(struct map* my_map, char **border_squares, struct coord remov
   struct coord new_square;
   int nx, ny;
   border_squares[x][y] = 0x03;
-  printf("Removed %d %d : ", x, y);
-  print_bit(border_squares[x][y]);
 
   for(int i=0; i<4; i++){
     for(int j=i; j<4; j++){
@@ -143,11 +140,8 @@ void update_border(struct map* my_map, char **border_squares, struct coord remov
         if(nx != -1 && border_squares[nx][ny] != 0x03){
           border_squares[nx][ny] = 0x00;
           if(is_valid_border(my_map, new_square)){
-            printf("Is Valid\n");
             border_squares[nx][ny] = 0x01;
           }
-          printf("Affected %d %d\n", nx, ny);
-          print_bit(border_squares[nx][ny]);
         }
       }
     }
@@ -163,28 +157,10 @@ void map_loop_distortion(struct map* my_map, struct grid *my_grid, int iter){
   }
   struct coord removed_square;
   get_border_squares(my_map, border_squares);
-  grid_fill(my_map, my_grid);
-  print_grid(my_map, my_grid, 1);
-  for(int j=0; j<n; j++){
-    for(int k=0; k<m; k++){
-      if(border_squares[j][k]){
-        printf("First Square : %d %d\n", j, k);
-      }
-    }
-  }
   for(int i=0; i<iter; i++){
     removed_square = get_random_square(border_squares, n, m);
     map_remove_square(my_map, removed_square);
     update_border(my_map, border_squares, removed_square);
-    grid_fill(my_map, my_grid);
-    print_grid(my_map, my_grid, 1);
-    for(int j=0; j<n; j++){
-      for(int k=0; k<m; k++){
-        if(border_squares[j][k] == 0x01){
-          printf("Square : %d %d\n", j, k);
-        }
-      }
-    }
   }
 }
 

@@ -4,6 +4,7 @@
 #include "../struct/map.h"
 #include "../struct/grid.h"
 #include "../generator/generator.h"
+#include "rules.h"
 
 struct map;
 struct grid;

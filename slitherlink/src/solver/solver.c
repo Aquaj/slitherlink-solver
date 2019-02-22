@@ -6,7 +6,8 @@
 void print_bit(char a);
 
 void solve(struct map* my_map, struct grid* my_grid){
-  basic_rules(my_map, my_grid);
+  //basic_rules(my_map, my_grid);
+  struct sub_grid *my_rules = init_rules(1);
 }
 
 void basic_rules(struct map* my_map, struct grid* my_grid){

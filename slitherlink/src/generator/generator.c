@@ -5,7 +5,7 @@
 
 void draw_loop(struct map* my_map, struct grid* my_grid){
   map_loop_init(my_map);
-  map_loop_distortion(my_map, my_grid, 200);
+  map_loop_distortion(my_map, my_grid, 3);
 }
 
 void draw_all_values(struct map* my_map, struct grid* my_grid){
