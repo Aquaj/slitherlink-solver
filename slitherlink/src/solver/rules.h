@@ -12,7 +12,9 @@ struct sub_grid{
 };
 
 struct sub_grid** init_rules(int nb_rules);
+void free_rules(struct sub_grid **my_rules, int nb_rules);
 struct sub_grid* rule_init(int n, int m);
+void rule_free(struct sub_grid* my_rule);
 void set_rule_edge(struct sub_grid *my_rule, struct coord my_edge, int is_horizontal, int drawn, int is_rule);
 void set_rule_square(struct sub_grid *my_rule, struct coord my_square, char value);
 

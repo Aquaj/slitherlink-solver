@@ -6,7 +6,7 @@
 #include "rules.h"
 
 struct sub_grid** init_rules(int nb_rules){
-  int n = 10;
+  int n = nb_rules;
   struct sub_grid** my_rules = malloc(n*sizeof(struct sub_grid*));
 
   int i = 0;
@@ -262,6 +262,16 @@ struct sub_grid** init_rules(int nb_rules){
   return my_rules;
 }
 
+void free_rules(struct sub_grid **my_rules, int nb_rules){
+  assert(my_rules);
+
+  for(int i=0; i<nb_rules; i++){
+    rule_free(my_rules[i]);
+  }
+
+  free(my_rules);
+}
+
 struct sub_grid* rule_init(int n, int m){
   struct sub_grid* my_rule = malloc(sizeof(struct sub_grid));
 
@@ -271,55 +281,17 @@ struct sub_grid* rule_init(int n, int m){
 
   return my_rule;
 }
-/*
-// Return the position of the edge in the binary representation of struct sub_grid
-struct coord edge_position(struct coord my_edge, int n, int m, int is_horizontal){
-  struct coord returned_pos;
-  int num_bit = 0;
-  int num_edge = 0;
 
-  if(!is_horizontal){
-    for(int i=0; i<n+1; i++){
-      for(int j=0; j<m; j++){
-        num_bit++;
-        if(!(num_bit%4)){
-          num_bit = 0;
-          num_edge++;
-        }
-      }
-    }
-  }
+void rule_free(struct sub_grid* my_rule){
+  assert(my_rule);
 
-  int i=0;
-  int j=0;
-  int x = my_edge.x;
-  int y = my_edge.y;
-  while(i!=x || j!=y){
-    j++;
-    num_bit++;
-    if(!(num_bit%4)){
-      num_bit = 0;
-      num_edge++;
-    }
-    if(i==x && j==y){
-      break;
-    }
-    if(j==m-is_horizontal){
-      j=0;
-      i++;
-      num_bit++;
-      if(!(num_bit%4)){
-        num_bit = 0;
-        num_edge++;
-      }
-    }
-  }
+  map_free(my_rule->rule_map);
+  map_free(my_rule->res_map);
+  grid_free(my_rule->rule_grid);
 
-  returned_pos.x = num_bit;
-  returned_pos.y = num_edge;
-  return returned_pos;
+  free(my_rule);
 }
-*/
+
 void set_rule_edge(struct sub_grid *my_rule, struct coord my_edge, int is_horizontal, int drawn, int is_rule){
   if(is_rule){
     if(drawn){
@@ -590,7 +562,13 @@ void rotate_rule(struct sub_grid *my_rule, struct sub_grid *my_rotation, int rot
 }
 
 void copy_subgrid(struct sub_grid *dest, struct sub_grid *src){
-  memcpy(dest, src, sizeof(struct sub_grid));
+  assert(dest);
+  assert(src);
+
+  map_copy(dest->rule_map, src->rule_map);
+  map_copy(dest->res_map, src->res_map);
+  grid_copy(dest->rule_grid, src->rule_grid);
+  //memcpy(dest, src, sizeof(struct sub_grid));
 }
 
 void rotate_subgrid(struct sub_grid *my_rotation){
@@ -655,4 +633,5 @@ void rotate_subgrid(struct sub_grid *my_rotation){
   }
 
   copy_subgrid(my_rotation, next_rotation);
+  rule_free(next_rotation);
 }

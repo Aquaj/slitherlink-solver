@@ -26,6 +26,7 @@ struct map{
 
 struct map* map_init(int n, int m);
 void map_free(struct map* my_map);
+void map_copy(struct map* dest, struct map* src);
 
 void map_fill_points(struct map* my_map, struct grid* my_grid);
 void map_loop_init(struct map* my_map);

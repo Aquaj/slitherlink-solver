@@ -16,6 +16,7 @@ struct grid{
 
 struct grid* grid_init(int n, int m);
 void grid_free(struct grid* my_grid);
+void grid_copy(struct grid* dest, struct grid* src);
 
 void grid_fill(struct map* my_map, struct grid* my_grid);
 void grid_remove_values(struct grid* my_grid);

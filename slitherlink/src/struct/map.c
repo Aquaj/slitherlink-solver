@@ -25,6 +25,32 @@ struct map* map_init(int n, int m){
   return my_map;
 }
 
+void map_free(struct map* my_map){
+  assert(my_map);
+  int n = my_map->n;
+  int m = my_map->m;
+
+  for(int i=0; i<m+1; i++){
+    free(my_map->points[i]);
+  }
+  free(my_map->points);
+
+  free(my_map);
+}
+
+void map_copy(struct map* dest, struct map* src){
+  assert(dest);
+  assert(src);
+  dest->n = src->n;
+  dest->m = src->m;
+
+  for(int i=0; i<src->n+1; i++){
+    for(int j=0; j<src->m+1; j++){
+      dest->points[i][j] = src->points[i][j];
+    }
+  }
+}
+
 void get_border_squares(struct map *my_map, char **border_squares){
   for(int i=0; i<my_map->n; i++){
     for(int j=0; j<my_map->m; j++){
@@ -162,6 +188,11 @@ void map_loop_distortion(struct map* my_map, struct grid *my_grid, int iter){
     map_remove_square(my_map, removed_square);
     update_border(my_map, border_squares, removed_square);
   }
+
+  for(int i=0; i<m; i++){
+    free(border_squares[i]);
+  }
+  free(border_squares);
 }
 
 enum orientation opposite_orientation(enum orientation my_ori){
