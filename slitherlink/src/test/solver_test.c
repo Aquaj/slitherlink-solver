@@ -13,7 +13,7 @@ int main(){
 
   draw_all_values(my_map, my_grid);
 
-  remove_values(my_grid);
+  //remove_values(my_grid);
 
   print_grid(my_map, my_grid, 1);
 

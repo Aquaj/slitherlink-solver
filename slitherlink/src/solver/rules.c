@@ -13,251 +13,448 @@ struct sub_grid** init_rules(int nb_rules){
   struct coord my_edge, my_square;
 
 
-    /**
-    * Rule #0
-    * Before   After
-    * .   .    . x .
-    *   0      x   x
-    * .   .    . x .
-    */
-    my_rules[i] = rule_init(1, 1);
+  /**
+  * Rule #0
+  * Before   After
+  * .   .    . x .
+  *   0      x   x
+  * .   .    . x .
+  */
+  my_rules[i] = rule_init(1, 1);
 
-    my_square.x = 0;
-    my_square.y = 0;
-    set_rule_square(my_rules[i], my_square, '0');
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '0');
 
-    my_edge.x = 0;
-    my_edge.y = 0;
-    cross_rule_edge(my_rules[i], my_edge, 1, 0);
-    my_edge.x = 1;
-    my_edge.y = 0;
-    cross_rule_edge(my_rules[i], my_edge, 1, 0);
-    my_edge.x = 0;
-    my_edge.y = 0;
-    cross_rule_edge(my_rules[i], my_edge, 0, 0);
-    my_edge.x = 0;
-    my_edge.y = 1;
-    cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
 
-    i++;
-    /**
-     * Rule #1
-     * Before       After
-     * .   .   .    .   .   .
-     *     x
-     * . x . x .    .   .   .
-     *                  x
-     * .   .   .    .   .   .
-     */
+  i++;
+  /**
+  * Rule #1
+  * Before       After
+  * .   .   .    .   .   .
+  *     x
+  * . x . x .    .   .   .
+  *                  x
+  * .   .   .    .   .   .
+  */
 
-     my_rules[i] = rule_init(2, 2);
-     my_edge.x = 1;
-     my_edge.y = 0;
-     cross_rule_edge(my_rules[i], my_edge, 1, 1);
-     my_edge.x = 1;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 1, 1);
-     my_edge.x = 0;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_rules[i] = rule_init(2, 2);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
 
-     my_edge.x = 1;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
 
-     i++;
-
-     /**
-     * Rule #2
-     * Before       After
-     * .   .   .    .   .   .
-     *     |
-     * . - .   .    .   . x .
-     *                  x
-     * .   .   .    .   .   .
-     */
-     my_rules[i] = rule_init(2, 2);
-     my_edge.x = 1;
-     my_edge.y = 0;
-     draw_rule_edge(my_rules[i], my_edge, 1, 1);
-     my_edge.x = 0;
-     my_edge.y = 1;
-     draw_rule_edge(my_rules[i], my_edge, 0, 1);
-
-     my_edge.x = 1;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 0);
-     my_edge.x = 1;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 1, 0);
-
-     i++;
+  i++;
 
   /**
-      * Rule #3
-      * Before       After
-      * .   .   .    .   .   .
-      *                  x
-      * . - . - .    .   .   .
-      *                  x
-      * .   .   .    .   .   .
-      */
-      my_rules[i] = rule_init(2, 2);
-      my_edge.x = 1;
-      my_edge.y = 0;
-      draw_rule_edge(my_rules[i], my_edge, 1, 1);
-      my_edge.x = 1;
-      my_edge.y = 1;
-      draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  * Rule #2
+  * Before       After
+  * .   .   .    .   .   .
+  *     |
+  * . - .   .    .   . x .
+  *                  x
+  * .   .   .    .   .   .
+  */
+  my_rules[i] = rule_init(2, 2);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 0, 1);
 
-      my_edge.x = 0;
-      my_edge.y = 1;
-      cross_rule_edge(my_rules[i], my_edge, 0, 0);
-      my_edge.x = 1;
-      my_edge.y = 1;
-      cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 1, 0);
 
-      i++;
+  i++;
 
-      /**
-     * Rule #4
-     * Before       After
-     * .   .   .    .   .   .
-     *     x
-     * . - .   .    .   . - .
-     *     x
-     * .   .   .    .   .   .
-     */
-     my_rules[i] = rule_init(2, 2);
-     my_edge.x = 1;
-     my_edge.y = 0;
-     draw_rule_edge(my_rules[i], my_edge, 1, 1);
-     my_edge.x = 0;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 1);
-     my_edge.x = 1;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  /**
+  * Rule #3
+  * Before       After
+  * .   .   .    .   .   .
+  *                  x
+  * . - . - .    .   .   .
+  *                  x
+  * .   .   .    .   .   .
+  */
+  my_rules[i] = rule_init(2, 2);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
 
-     my_edge.x = 1;
-     my_edge.y = 1;
-     draw_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
 
-     i++;
+  i++;
 
-     /**
-     * Rule #5
-     * Before       After
-     * .   .   .    .   .   .
-     *     x
-     * . - . x .    .   .   .
-     *                  |
-     * .   .   .    .   .   .
-     */
-     my_rules[i] = rule_init(2, 2);
-     my_edge.x = 1;
-     my_edge.y = 0;
-     draw_rule_edge(my_rules[i], my_edge, 1, 1);
-     my_edge.x = 1;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 1, 1);
-     my_edge.x = 0;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  /**
+  * Rule #4
+  * Before       After
+  * .   .   .    .   .   .
+  *     x
+  * . - .   .    .   . - .
+  *     x
+  * .   .   .    .   .   .
+  */
+  my_rules[i] = rule_init(2, 2);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
 
-     my_edge.x = 1;
-     my_edge.y = 1;
-     draw_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 1, 0);
 
-     i++;
+  i++;
 
-     /**
-     * Rule #6
-     * Before   After
-     * . - .    .   .
-     *   1      x   x
-     * .   .    . x .
-     */
-     my_rules[i] = rule_init(1, 1);
+  /**
+  * Rule #5
+  * Before       After
+  * .   .   .    .   .   .
+  *     x
+  * . - . x .    .   .   .
+  *                  |
+  * .   .   .    .   .   .
+  */
+  my_rules[i] = rule_init(2, 2);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
 
-     my_square.x = 0;
-     my_square.y = 0;
-     set_rule_square(my_rules[i], my_square, '1');
-     my_edge.x = 0;
-     my_edge.y = 0;
-     draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 0, 0);
 
-     my_edge.x = 1;
-     my_edge.y = 0;
-     cross_rule_edge(my_rules[i], my_edge, 1, 0);
-     my_edge.x = 0;
-     my_edge.y = 0;
-     cross_rule_edge(my_rules[i], my_edge, 0, 0);
-     my_edge.x = 0;
-     my_edge.y = 1;
-     cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  i++;
 
-     i++;
+  /**
+  * Rule #6
+  * Before   After
+  * . - .    .   .
+  *   1      x   x
+  * .   .    . x .
+  */
+  my_rules[i] = rule_init(1, 1);
 
-     /**
-      * Rule #7
-      * Before   After
-      * .   .    . - .
-      * x 1 x
-      * . x .    .   .
-      */
-      my_rules[i] = rule_init(1, 1);
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '1');
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
 
-      my_square.x = 0;
-      my_square.y = 0;
-      set_rule_square(my_rules[i], my_square, '1');
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
 
-      my_edge.x = 1;
-      my_edge.y = 0;
-      cross_rule_edge(my_rules[i], my_edge, 1, 1);
-      my_edge.x = 0;
-      my_edge.y = 0;
-      cross_rule_edge(my_rules[i], my_edge, 0, 1);
-      my_edge.x = 0;
-      my_edge.y = 1;
-      cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  i++;
+
+  /**
+  * Rule #7
+  * Before   After
+  * .   .    . - .
+  * x 1 x
+  * . x .    .   .
+  */
+  my_rules[i] = rule_init(1, 1);
+
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '1');
+
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
 
 
-      my_edge.x = 0;
-      my_edge.y = 0;
-      draw_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 0);
 
-      i++;
+  i++;
 
-      /**
-       * Rule #8
-       * Before   After
-       * . - .    .   .
-       * | 2          x
-       * .   .    . x .
-       */
-       my_rules[i] = rule_init(1, 1);
+  /**
+  * Rule #8
+  * Before   After
+  * . - .    .   .
+  * | 2          x
+  * .   .    . x .
+  */
+  my_rules[i] = rule_init(1, 1);
 
-       my_square.x = 0;
-       my_square.y = 0;
-       set_rule_square(my_rules[i], my_square, '2');
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '2');
 
-       my_edge.x = 0;
-       my_edge.y = 0;
-       draw_rule_edge(my_rules[i], my_edge, 1, 1);
-       my_edge.x = 0;
-       my_edge.y = 0;
-       draw_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 0, 1);
 
-       my_edge.x = 1;
-       my_edge.y = 0;
-       cross_rule_edge(my_rules[i], my_edge, 1, 1);
-       my_edge.x = 0;
-       my_edge.y = 1;
-       cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
 
-       i++;
+  i++;
 
+  /**
+  * Rule #9
+  * Before   After
+  * .   .    . - .
+  *   2 x    |
+  * . x .    .   .
+  */
+  my_rules[i] = rule_init(1, 1);
+
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '2');
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
+
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 0, 0);
+
+  i++;
+
+  /**
+  * Rule #10
+  * Before   After
+  * . - .    .   .
+  *   2      x   x
+  * . - .    .   .
+  */
+  my_rules[i] = rule_init(1, 1);
+
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '2');
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 1);
+
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+
+  i++;
+
+  /**
+  * Rule #11
+  * Before   After
+  * .   .    . - .
+  * x 2 x
+  * .   .    . - .
+  */
+  my_rules[i] = rule_init(1, 1);
+
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '2');
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
+
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 0);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 0);
+
+  i++;
+
+  /**
+  * Rule #12
+  * Before   After
+  * . x .    .   .
+  *   3      |   |
+  * .   .    . - .
+  */
+  my_rules[i] = rule_init(1, 1);
+
+  my_square.x = 0;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '3');
+  my_edge.x = 0;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+
+  my_edge.x = 0;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 0;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  draw_rule_edge(my_rules[i], my_edge, 1, 0);
+
+  i++;
+
+  /** Rule 13
+  * Before         After
+  * .   .   .   .      .   .   .   .
+  *         |
+  * .   .   . x .      .   .   .   .
+  *       1                x
+  * .   .   .   .      .   . x .   .
+  *
+  * .   .   .   .      .   .   .   .
+  *
+  */
+  my_rules[i] = rule_init(2, 2);
+
+  my_square.x = 1;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '1');
+  my_edge.x = 0;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 0);
+  my_edge.x = 2;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 0);
+
+  i++;
+
+  /** Rule 14
+  * Before         After
+  * .   .   .   .      .   .   .   .
+  *         |
+  * .   .   .   .      .   .   . x .
+  *     x 1
+  * .   . x .   .      .   .   .   .
+  *
+  * .   .   .   .      .   .   .   .
+  *
+  */
+  my_rules[i] = rule_init(2, 2);
+
+  my_square.x = 1;
+  my_square.y = 0;
+  set_rule_square(my_rules[i], my_square, '1');
+  my_edge.x = 0;
+  my_edge.y = 1;
+  draw_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 1;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 0, 1);
+  my_edge.x = 2;
+  my_edge.y = 0;
+  cross_rule_edge(my_rules[i], my_edge, 1, 1);
+
+  my_edge.x = 1;
+  my_edge.y = 1;
+  cross_rule_edge(my_rules[i], my_edge, 1, 0);
+
+
+
+  i++;
+/*
+  i = 13;
+  print_grid(my_rules[i]->rule_map, my_rules[i]->rule_grid, 1);
+  print_grid(my_rules[i]->res_map, my_rules[i]->rule_grid, 1);
+
+  rotate_rule(my_rules[i], my_rules[i], 1);
+
+  print_grid(my_rules[i]->rule_map, my_rules[i]->rule_grid, 1);
+  print_grid(my_rules[i]->res_map, my_rules[i]->rule_grid, 1);
+
+  rotate_rule(my_rules[i], my_rules[i], 1);
+
+  print_grid(my_rules[i]->rule_map, my_rules[i]->rule_grid, 1);
+  print_grid(my_rules[i]->res_map, my_rules[i]->rule_grid, 1);
+
+  rotate_rule(my_rules[i], my_rules[i], 1);
+
+  print_grid(my_rules[i]->rule_map, my_rules[i]->rule_grid, 1);
+  print_grid(my_rules[i]->res_map, my_rules[i]->rule_grid, 1);
+*/
 
   return my_rules;
 }
@@ -568,7 +765,6 @@ void copy_subgrid(struct sub_grid *dest, struct sub_grid *src){
   map_copy(dest->rule_map, src->rule_map);
   map_copy(dest->res_map, src->res_map);
   grid_copy(dest->rule_grid, src->rule_grid);
-  //memcpy(dest, src, sizeof(struct sub_grid));
 }
 
 void rotate_subgrid(struct sub_grid *my_rotation){
@@ -622,11 +818,11 @@ void rotate_subgrid(struct sub_grid *my_rotation){
     }
   }
 
-  for(int i=0; i<m; i++){
-    for(int j=0; j<n; j++){
+  for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
       if(my_rotation->rule_grid->squares[i][j] != 'N'){
-        next_square.x = j;
-        next_square.y = m-1-j;
+        next_square.x = m-1-j;
+        next_square.y = i;
         set_rule_square(next_rotation, next_square, my_rotation->rule_grid->squares[i][j]);
       }
     }

@@ -7,7 +7,7 @@
 void print_bit(char a);
 
 void solve(struct map* my_map, struct grid* my_grid){
-  int nb_rules = 9;
+  int nb_rules = 15;
   struct sub_grid **my_rules = init_rules(nb_rules);
 
   struct sub_grid *my_subgrid, *my_rotation;
