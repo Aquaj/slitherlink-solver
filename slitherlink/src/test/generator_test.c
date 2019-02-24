@@ -3,10 +3,12 @@
 #include "../generator/generator.h"
 
 int main(){
-  struct map* my_map = map_init(20,20);
-  struct grid* my_grid = grid_init(20,20);
+  int n=5;
+  int m=5;
+  struct map* my_map = map_init(n,m);
+  struct grid* my_grid = grid_init(n,m);
 
-  draw_loop(my_map, my_grid);
+  draw_loop(my_map, my_grid, 10);
 
   draw_all_values(my_map, my_grid);
 

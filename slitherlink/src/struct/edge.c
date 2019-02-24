@@ -49,6 +49,15 @@ void draw_edge(struct map* my_map, struct coord my_edge, int is_horizontal){
   }
 }
 
+void cross_edge(struct map* my_map, struct coord my_edge, int is_horizontal){
+  if(is_horizontal){
+    set_crossed_point(my_map, my_edge, EAST);
+  }
+  else{
+    set_crossed_point(my_map, my_edge, SOUTH);
+  }
+}
+
 struct coord get_edge(struct coord my_square, enum orientation my_ori){
   struct coord my_edge;
   int i = my_square.x;

@@ -3,9 +3,9 @@
 
 #include "generator.h"
 
-void draw_loop(struct map* my_map, struct grid* my_grid){
+void draw_loop(struct map* my_map, struct grid* my_grid, int iter){
   map_loop_init(my_map);
-  map_loop_distortion(my_map, my_grid, 3);
+  map_loop_distortion(my_map, my_grid, iter);
 }
 
 void draw_all_values(struct map* my_map, struct grid* my_grid){

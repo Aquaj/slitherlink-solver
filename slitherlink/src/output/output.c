@@ -106,9 +106,10 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
         /* horizontal edges */
         if(is_edge_drawn(my_map, my_square, 1)){
           printf("    _ ");
-        }else if(is_edge_crossed(my_map, my_square, 1)){
-          printf("    x ");
-        }else{
+        }//else if(is_edge_crossed(my_map, my_square, 1)){
+          //printf("    x ");
+        //}
+        else{
           printf("      ");
         }
       }
@@ -120,9 +121,10 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
           /* vertical edges */
           if(is_edge_drawn(my_map, my_square, 0)){
             printf(" | ");
-          }else if(is_edge_crossed(my_map, my_square, 0)){
-            printf(" x ");
-          }else{
+          }//else if(is_edge_crossed(my_map, my_square, 0)){
+          //  printf(" x ");
+          //}
+          else{
             printf("   ");
           }
           /* value of the square */

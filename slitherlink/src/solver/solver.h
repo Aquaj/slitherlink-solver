@@ -12,7 +12,7 @@ struct grid;
 void solve(struct map* my_map, struct grid* my_grid);
 void basic_rules(struct map* my_map, struct grid* my_grid);
 
-int rule_applies(struct map* my_map, struct coord my_square, char value);
+//int rule_applies(struct map* my_map, struct coord my_square, char value);
 
 int rule_zero_applies(struct map* my_map, struct coord my_square);
 

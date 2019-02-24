@@ -11,6 +11,12 @@ struct grid* grid_init(int n, int m){
     my_grid->squares[i] = calloc((m),sizeof(char));
   }
 
+  for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+      my_grid->squares[i][j] = 'N';
+    }
+  }
+
   my_grid->n = n;
   my_grid->m = m;
 
@@ -42,6 +48,7 @@ void grid_fill(struct map* my_map, struct grid* my_grid){
 // Change to characters
 void grid_remove_values(struct grid* my_grid){
   assert(my_grid);
+  int zeros = 0;
   int ones = 0;
   int twos = 0;
   int threes = 0;
@@ -50,7 +57,13 @@ void grid_remove_values(struct grid* my_grid){
     for(int j=0; j<my_grid->m; j++){
       switch(my_grid->squares[i][j]){
         case '0':
-          my_grid->squares[i][j] = 'N';
+          zeros++;
+          if(zeros == 6){
+            my_grid->squares[i][j] = 'N';
+          }
+          else if(zeros > 3){
+            zeros = 0;
+          }
         break;
         case '1':
           ones++;

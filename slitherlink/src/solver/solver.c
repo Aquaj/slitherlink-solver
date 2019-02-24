@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "assert.h"
+#include <stdlib.h>
+#include <assert.h>
 
 #include "solver.h"
 
@@ -7,100 +8,54 @@ void print_bit(char a);
 
 void solve(struct map* my_map, struct grid* my_grid){
   //basic_rules(my_map, my_grid);
-  struct sub_grid *my_rules = init_rules(1);
-}
+  int nb_rules = 9;
+  struct sub_grid **my_rules = init_rules(nb_rules);
 
-void basic_rules(struct map* my_map, struct grid* my_grid){
-  int n=my_map->n;
-  int m=my_map->m;
+  //subgrid_draw_rule(my_map, my_rules[4], 0, 0);
+  //subgrid_draw_rule(my_map, my_rules[0], 1, 1);
+  //subgrid_draw_rule(my_map, my_rules[2], 2, 0);
+  //subgrid_draw_rule(my_map, my_rules[3], 2, 2);
 
-  int rule;
-  char value;
+  struct sub_grid *my_subgrid, *my_rotation;
+  int n = my_map->n;
+  int m = my_map->m;
+  int rule_n;
+  int rule_m;
 
-  for(int i=0; i<n; i++){
-    for(int j=0; j<m; j++){
-      struct coord my_square;
-      my_square.x = i;
-      my_square.y = j;
-      value = my_grid->squares[i][j];
-      do{
-        rule = rule_applies(my_map, my_square, value);
-        if(rule){
-          apply_rule(my_map, my_square, value, rule);
+  int *rule_counter = calloc(nb_rules, sizeof(int));
+
+  int iter = 0;
+  while(iter < 10){
+    rule_counter = calloc(nb_rules, sizeof(int));
+    for(int i=0; i<nb_rules; i++){
+      rule_n = my_rules[i]->rule_map->n;
+      rule_m = my_rules[i]->rule_map->m;
+
+      //my_subgrid = rule_init(rule_n, rule_m);
+      for(int rot=0; rot<4; rot++){
+        my_rotation = rule_init(rule_n, rule_m);
+        rotate_rule(my_rules[i], my_rotation, rot);
+
+        for(int offset_x=0; offset_x<n+1-rule_n; offset_x++){
+          for(int offset_y=0; offset_y<m+1-rule_m; offset_y++){
+            my_subgrid = rule_init(rule_n, rule_m);
+            subgrid_extract(my_map, my_grid, my_subgrid, rule_n, rule_m, offset_x, offset_y);
+            if(rule_applies(*my_subgrid, *my_rotation)){
+              rule_counter[i]++;
+              subgrid_draw_res(my_map, my_rotation, offset_x, offset_y);
+            }
+          }
         }
-      }while(rule);
+      }
+
+
+      //rule_free(my_subgrid);
     }
+
+    for(int i=0; i<nb_rules; i++){
+      printf("Iter n %d Rule %d applied : %d\n", iter, i, rule_counter[i]);
+    }
+    iter++;
+    printf("\n");
   }
-}
-
-int rule_applies(struct map* my_map, struct coord my_square, char value){
-  switch(value){
-    case '0':
-      return rule_zero_applies(my_map, my_square);
-    break;
-    case '1':
-      return 0;
-    break;
-    case '2':
-      return 0;
-    break;
-    case '3':
-      return 0;
-    break;
-    case 'N':
-      return 0;
-    break;
-    default:
-      assert(NULL);
-    break;
-  }
-}
-
-int rule_zero_applies(struct map* my_map, struct coord my_square){
-  int i = my_square.x;
-  int j = my_square.y;
-
-  // get north/east... edge
-  struct coord north_edge = get_edge(my_square, NORTH);
-  struct coord east_edge = get_edge(my_square, EAST);
-  struct coord south_edge = get_edge(my_square, SOUTH);
-  struct coord west_edge = get_edge(my_square, WEST);
-
-  int value = is_edge_crossed(my_map, north_edge, 1) + is_edge_crossed(my_map, east_edge, 0) + is_edge_crossed(my_map, south_edge, 1) + is_edge_crossed(my_map, west_edge, 0);
-  return value != 4;
-}
-
-void apply_rule(struct map* my_map, struct coord my_square, char value, int rule){
-  switch(value){
-    case '0':
-      apply_zero_rule(my_map, my_square, rule);
-    break;
-    case '1':
-    break;
-    case '2':
-    break;
-    case '3':
-    break;
-    case 'N':
-    break;
-    default:
-      assert(NULL);
-    break;
-  }
-}
-
-void apply_zero_rule(struct map* my_map, struct coord my_square, int rule){
-  struct coord my_point;
-  my_point.x = my_square.x;
-  my_point.y = my_square.y;
-  set_crossed_point(my_map, my_point, EAST);
-  set_crossed_point(my_map, my_point, SOUTH);
-
-  my_point.x = my_square.x+1;
-  my_point.y = my_square.y;
-  set_crossed_point(my_map, my_point, EAST);
-
-  my_point.x = my_square.x;
-  my_point.y = my_square.y+1;
-  set_crossed_point(my_map, my_point, SOUTH);
 }

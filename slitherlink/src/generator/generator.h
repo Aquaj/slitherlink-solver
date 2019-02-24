@@ -4,7 +4,7 @@
 #include "../struct/map.h"
 #include "../output/output.h"
 
-void draw_loop(struct map* my_map, struct grid* my_grid);
+void draw_loop(struct map* my_map, struct grid* my_grid, int n);
 void draw_all_values(struct map* my_map, struct grid* my_grid);
 void draw_values(struct map* my_map);
 void remove_values(struct grid* my_grid);
