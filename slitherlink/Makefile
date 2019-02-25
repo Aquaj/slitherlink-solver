@@ -37,5 +37,9 @@ edge_test:
 	$(CC) $(OUTPUT) $(STR)/*.c $(TST)/edge_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
+point_test:
+	$(CC) $(STR)/*.c $(TST)/point_test.c -o $@.out
+	@echo "Executable" $@.out "generated."
+
 clean:
 	@rm -fr *.out .Makefile.swp

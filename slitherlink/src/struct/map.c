@@ -195,26 +195,6 @@ void map_loop_distortion(struct map* my_map, struct grid *my_grid, int iter){
   free(border_squares);
 }
 
-enum orientation opposite_orientation(enum orientation my_ori){
-  switch(my_ori){
-    case NORTH:
-      return SOUTH;
-    break;
-    case EAST:
-      return WEST;
-    break;
-    case SOUTH:
-      return NORTH;
-    break;
-    case WEST:
-      return EAST;
-    break;
-    default:
-      assert(NULL);
-    break;
-  }
-}
-
 struct coord neighbor(struct map* my_map, struct coord my_point, enum orientation my_ori){
   int x = my_point.x;
   int y = my_point.y;

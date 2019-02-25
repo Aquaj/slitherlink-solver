@@ -105,7 +105,7 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
 
         /* horizontal edges */
         if(is_edge_drawn(my_map, my_square, 1)){
-          printf("\x1b[32m    _ \x1b[0m");
+          printf("\x1b[33m    _ \x1b[0m");
         }/*else if(is_edge_crossed(my_map, my_square, 1)){
           printf("    x ");
         }*/
@@ -120,7 +120,7 @@ void print_grid(struct map* my_map, struct grid* my_grid, int _verbose){
         if(i!=my_grid->n){
           /* vertical edges */
           if(is_edge_drawn(my_map, my_square, 0)){
-            printf("\x1b[32m | \x1b[0m");
+            printf("\x1b[33m | \x1b[0m");
           }/*else if(is_edge_crossed(my_map, my_square, 0)){
             printf(" x ");
           }*/

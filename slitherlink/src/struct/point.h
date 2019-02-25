@@ -30,6 +30,8 @@ int is_drawn_point(struct map* my_map, struct coord my_point, enum orientation m
 int is_crossed_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
 int is_empty_point(struct map* my_map, struct coord my_point, enum orientation my_ori);
 
+int point_deg(struct map* my_map, struct coord my_point, int drawn);
+
 void draw_line(struct map* my_map, struct coord first, struct coord second, enum orientation my_ori);
 
 
