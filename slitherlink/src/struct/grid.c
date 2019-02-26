@@ -48,23 +48,24 @@ void grid_copy(struct grid* dest, struct grid* src){
   }
 }
 
+char square_value(struct map* my_map, struct coord my_square){
+  struct coord north_edge = get_edge(my_square, NORTH);
+  struct coord east_edge = get_edge(my_square, EAST);
+  struct coord south_edge = get_edge(my_square, SOUTH);
+  struct coord west_edge = get_edge(my_square, WEST);
+
+  int value = is_edge_drawn(my_map, north_edge, 1) + is_edge_drawn(my_map, east_edge, 0) + is_edge_drawn(my_map, south_edge, 1) + is_edge_drawn(my_map, west_edge, 0);
+  return value + '0';
+}
+
 void grid_fill(struct map* my_map, struct grid* my_grid){
-  struct coord north_edge;
-  struct coord east_edge;
-  struct coord south_edge;
-  struct coord west_edge;
   struct coord my_square;
-  int value = 0;
+
   for(int i=0; i<my_grid->n; i++){
     for(int j=0; j<my_grid->m; j++){
       my_square.x = i;
       my_square.y = j;
-      north_edge = get_edge(my_square, NORTH);
-      east_edge = get_edge(my_square, EAST);
-      south_edge = get_edge(my_square, SOUTH);
-      west_edge = get_edge(my_square, WEST);
-      value = is_edge_drawn(my_map, north_edge, 1) + is_edge_drawn(my_map, east_edge, 0) + is_edge_drawn(my_map, south_edge, 1) + is_edge_drawn(my_map, west_edge, 0);
-      my_grid->squares[i][j] = value + '0';
+      my_grid->squares[i][j] = square_value(my_map, my_square);
     }
   }
 }
@@ -79,6 +80,7 @@ void grid_remove_values(struct grid* my_grid){
   int ones = 0;
   int twos = 0;
   int threes = 0;
+
   int max_zeros = 1;//n*m
   int max_ones = 1;//n/6;
   int max_twos = 1;//n/8;
