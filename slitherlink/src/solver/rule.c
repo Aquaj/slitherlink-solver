@@ -25,6 +25,14 @@ void rule_free(struct sub_grid* my_rule){
   free(my_rule);
 }
 
+void rule_clear(struct sub_grid* my_rule){
+  assert(my_rule);
+
+  map_clear(my_rule->rule_map);
+  map_clear(my_rule->res_map);
+  grid_clear(my_rule->rule_grid);
+}
+
 void set_rule_edge(struct sub_grid *my_rule, struct coord my_edge, int is_horizontal, int drawn, int is_rule){
   if(is_rule){
     if(drawn){

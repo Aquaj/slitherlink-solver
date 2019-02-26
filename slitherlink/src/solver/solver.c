@@ -196,18 +196,19 @@ int basic_rules(struct map* my_map, struct grid* my_grid){
     for(int i=0; i<nb_rules; i++){
       rule_n = my_rules[i]->rule_map->n;
       rule_m = my_rules[i]->rule_map->m;
+      my_subgrid = rule_init(rule_n, rule_m);
 
       for(int offset_x=0; offset_x<n+1-rule_n; offset_x++){
         for(int offset_y=0; offset_y<m+1-rule_m; offset_y++){
-          my_subgrid = rule_init(rule_n, rule_m);
           subgrid_extract(my_map, my_grid, my_subgrid, rule_n, rule_m, offset_x, offset_y);
           if(rule_applies(*my_subgrid, *my_rules[i])){
             rule_counter[i]++;
             subgrid_draw_res(my_map, my_rules[i], offset_x, offset_y);
           }
-          rule_free(my_subgrid);
+          rule_clear(my_subgrid);
         }
       }
+      rule_free(my_subgrid);
     }
 
     /* VERBOSE */
@@ -327,7 +328,7 @@ int is_one_loop(struct map* my_map){
   end = run_through_loop(my_map, is_in_loop, first);
 
   if(end.x != first.x || end.y != first.y){
-    for(int i=0;i<n; i++){
+    for(int i=0;i<n+1; i++){
       free(is_in_loop[i]);
     }
     free(is_in_loop);
@@ -338,7 +339,7 @@ int is_one_loop(struct map* my_map){
   for(int i=0; i<n+1; i++){
     for(int j=0; j<m+1; j++){
       if(is_in_loop[i][j] == 0x01){
-        for(int i=0;i<n; i++){
+        for(int i=0;i<n+1; i++){
           free(is_in_loop[i]);
         }
         free(is_in_loop);
@@ -348,7 +349,7 @@ int is_one_loop(struct map* my_map){
     }
   }
 
-  for(int i=0;i<n; i++){
+  for(int i=0;i<n+1; i++){
     free(is_in_loop[i]);
   }
   free(is_in_loop);

@@ -4,12 +4,12 @@
 #include "../solver/solver.h"
 
 int main(){
-  int n=20;
-  int m=20;
+  int n=6;
+  int m=6;
   struct map* my_map = map_init(n,m);
   struct grid* my_grid = grid_init(n,m);
 
-  draw_loop(my_map, my_grid, 250);
+  draw_loop(my_map, my_grid, 10);
 
   draw_all_values(my_map, my_grid);
 

@@ -16,6 +16,7 @@ struct grid{
 
 struct grid* grid_init(int n, int m);
 void grid_free(struct grid* my_grid);
+void grid_clear(struct grid* my_grid);
 void grid_copy(struct grid* dest, struct grid* src);
 
 char square_value(struct map* my_map, struct coord my_square);

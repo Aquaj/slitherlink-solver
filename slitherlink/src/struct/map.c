@@ -38,6 +38,18 @@ void map_free(struct map* my_map){
   free(my_map);
 }
 
+void map_clear(struct map* my_map){
+  assert(my_map);
+  int n = my_map->n;
+  int m = my_map->m;
+
+  for(int i=0; i<n+1; i++){
+    for(int j=0; j<m+1; j++){
+      my_map->points[i][j] = 0x00;
+    }
+  }
+}
+
 void map_copy(struct map* dest, struct map* src){
   assert(dest);
   assert(src);

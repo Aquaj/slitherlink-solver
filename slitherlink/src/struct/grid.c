@@ -11,14 +11,10 @@ struct grid* grid_init(int n, int m){
     my_grid->squares[i] = calloc((m),sizeof(char));
   }
 
-  for(int i=0; i<n; i++){
-    for(int j=0; j<m; j++){
-      my_grid->squares[i][j] = 'N';
-    }
-  }
-
   my_grid->n = n;
   my_grid->m = m;
+
+  grid_clear(my_grid);
 
   return my_grid;
 }
@@ -33,6 +29,17 @@ void grid_free(struct grid* my_grid){
   free(my_grid->squares);
 
   free(my_grid);
+}
+
+void grid_clear(struct grid* my_grid){
+  int n = my_grid->n;
+  int m = my_grid->m;
+
+  for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+      my_grid->squares[i][j] = 'N';
+    }
+  }
 }
 
 void grid_copy(struct grid* dest, struct grid* src){
