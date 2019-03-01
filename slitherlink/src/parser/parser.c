@@ -1,42 +1,31 @@
 #include "parser.h"
 
-int main(int argc, char *argv[]){
+struct grid* parse(){
 
   enum q_state state = Q0;
-  FILE* file = NULL;
   int n = 0, m = 0;
 
-  file = fopen("../test/parser_test.txt", "r");
+  FILE *file = fopen("src/test/slithers/slither_lvl112.txt", "r");
 
   if (file != NULL)
     {
-        printf("File open\n");
-
         matrix_size(file,&n,&m);
-        printf("Matrix's size : %d x %d \n",n,m);
 
         struct grid* my_grid = grid_init(n,m);
         file_parse(file,&state,my_grid,n,m);
-        for (int i = 0; i < n; i++) {
-          for (int j = 0; j < m; j++) {
-            printf("%c",my_grid->squares[i][j]);
-          }
-          putchar('\n');
-        }
 
         if(state == Q_ERR)
           printf("Matrix filling fail\n");
         else if (state == Q0 && n == 0 && m == 0){
           printf("Empty matrix or contains only comments\n");
               }
-        else
-          printf("Matrix successfully filled\n");
         fclose(file);
+        return my_grid;
     }
   else
         printf("Impossible to open the file\n");
 
-  return 0;
+  return NULL;
 }
 
 void matrix_size(FILE* file, int* n, int* m){

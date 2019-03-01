@@ -88,10 +88,10 @@ void grid_remove_values(struct grid* my_grid){
   int twos = 0;
   int threes = 0;
 
-  int max_zeros = 1;//n*m
-  int max_ones = 1;//n/6;
-  int max_twos = 1;//n/8;
-  int max_threes = 1;//n/4;
+  int max_zeros = 2;//n*m
+  int max_ones = 2;//n/6;
+  int max_twos = 2;//n/8;
+  int max_threes = 2;//n/4;
 
 
   for(int i=0; i<my_grid->n; i++){

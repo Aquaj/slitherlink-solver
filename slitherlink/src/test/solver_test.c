@@ -2,14 +2,21 @@
 #include <assert.h>
 
 #include "../solver/solver.h"
+#include "../parser/parser.h"
 
 int main(){
-  int n=6;
-  int m=6;
+  int n=10;
+  int m=10;
+/*
+  struct grid* my_grid = parse();
+  n = my_grid->n;
+  m = my_grid->m;
+*/
   struct map* my_map = map_init(n,m);
   struct grid* my_grid = grid_init(n,m);
 
-  draw_loop(my_map, my_grid, 10);
+
+  draw_loop(my_map, my_grid, 50);
 
   draw_all_values(my_map, my_grid);
 

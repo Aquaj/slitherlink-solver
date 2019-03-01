@@ -2,6 +2,7 @@
 #define ___rule_h___
 
 #include "../struct/map.h"
+#include "../output/output.h"
 
 struct coord;
 
@@ -22,7 +23,7 @@ void cross_rule_edge(struct sub_grid *my_rule, struct coord my_edge, int is_hori
 
 void subgrid_extract(struct map* my_map, struct grid *my_grid, struct sub_grid *my_subgrid, int n, int m, int offset_x, int offset_y);
 int rule_applies(struct sub_grid my_subgrid, struct sub_grid my_rule);
-void subgrid_draw_res(struct map* my_map, struct sub_grid *my_subgrid, int offset_x, int offset_y);
+int subgrid_draw_res(struct map* my_map, struct sub_grid* my_subgrid, int offset_x, int offset_y);
 void subgrid_draw_rule(struct map* my_map, struct sub_grid* my_subgrid, int offset_x, int offset_y);
 
 void rotate_rule(struct sub_grid *my_rule, struct sub_grid *my_rotation, int rot);

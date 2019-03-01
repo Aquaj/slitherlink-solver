@@ -183,7 +183,7 @@ int rule_applies(struct sub_grid my_subgrid, struct sub_grid my_rule){
   return 1;
 }
 
-void subgrid_draw_res(struct map* my_map, struct sub_grid* my_subgrid, int offset_x, int offset_y){
+int subgrid_draw_res(struct map* my_map, struct sub_grid* my_subgrid, int offset_x, int offset_y){
   assert(my_map);
   assert(my_subgrid);
 
@@ -205,9 +205,21 @@ void subgrid_draw_res(struct map* my_map, struct sub_grid* my_subgrid, int offse
         map_edge.x = i;
         map_edge.y = j;
         if(is_edge_drawn(my_subgrid->res_map, my_edge, 1)){
+          if(is_edge_crossed(my_map, map_edge, 1)){
+            /*printf("Contradiction edge D h %d %d \n", i, j);
+            print_grid(my_subgrid->rule_map, my_subgrid->rule_grid, 1);
+            print_grid(my_subgrid->res_map, my_subgrid->rule_grid, 1);*/
+            return 0;
+          }
           draw_edge(my_map, map_edge, 1);
         }
         else if(is_edge_crossed(my_subgrid->res_map, my_edge, 1)){
+          if(is_edge_drawn(my_map, map_edge, 1)){
+            /*printf("Contradiction edge X h %d %d \n", i, j);
+            print_grid(my_subgrid->rule_map, my_subgrid->rule_grid, 1);
+            print_grid(my_subgrid->res_map, my_subgrid->rule_grid, 1);*/
+            return 0;
+          }
           cross_edge(my_map, map_edge, 1);
         }
       }
@@ -218,14 +230,28 @@ void subgrid_draw_res(struct map* my_map, struct sub_grid* my_subgrid, int offse
         map_edge.x = i;
         map_edge.y = j;
         if(is_edge_drawn(my_subgrid->res_map, my_edge, 0)){
+          if(is_edge_crossed(my_map, map_edge, 0)){
+            /*printf("Contradiction edge D v %d %d \n", i, j);
+            print_grid(my_subgrid->rule_map, my_subgrid->rule_grid, 1);
+            print_grid(my_subgrid->res_map, my_subgrid->rule_grid, 1);*/
+            return 0;
+          }
           draw_edge(my_map, map_edge, 0);
         }
         else if(is_edge_crossed(my_subgrid->res_map, my_edge, 0)){
+          if(is_edge_drawn(my_map, map_edge, 0)){
+            /*printf("Contradiction edge X v %d %d \n", i, j);
+            print_grid(my_subgrid->rule_map, my_subgrid->rule_grid, 1);
+            print_grid(my_subgrid->res_map, my_subgrid->rule_grid, 1);*/
+            return 0;
+          }
           cross_edge(my_map, map_edge, 0);
         }
       }
     }
   }
+
+  return 1;
 }
 
 void subgrid_draw_rule(struct map* my_map, struct sub_grid* my_subgrid, int offset_x, int offset_y){

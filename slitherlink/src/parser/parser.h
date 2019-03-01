@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "../struct/grid.h"
 
+struct grid;
+
 enum q_state{
   Q0,    //0
   Q1,    //1
@@ -12,6 +14,7 @@ enum q_state{
   Q_OUT  //4
 };
 
+struct grid* parse();
 void file_parse(FILE* file, enum q_state *state, struct grid* my_grid, int n, int m);
 void matrix_size(FILE* file, int* m, int* n);
 void fill_matrix(FILE* file, enum q_state *state, int *caractere, struct grid* my_grid, int *my_n, int *my_m, int n, int m);
