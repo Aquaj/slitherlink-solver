@@ -3,6 +3,7 @@ GENERATOR=src/generator/generator.c
 STR=src/struct
 OUTPUT=src/output/output.c
 SOLVER=src/solver/*.c
+PARSER=src/parser/parser.c
 TST=src/test
 #CFLAGS=
 #DEPS=
@@ -26,11 +27,15 @@ slitherlink:
 	@echo "Executable" $@.out "generated."
 
 solver_test:
-	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) $(SOLVER) $(TST)/solver_test.c -o $@.out
+	$(CC) $(GENERATOR) $(PARSER) $(STR)/*.c $(OUTPUT) $(SOLVER) $(TST)/solver_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
 generator_test:
 	$(CC) $(GENERATOR) $(STR)/*.c $(OUTPUT) $(TST)/generator_test.c -o $@.out
+	@echo "Executable" $@.out "generated."
+
+parser_test:
+	$(CC) $(PARSER) $(STR)/*.c $(OUTPUT) -o $@.out
 	@echo "Executable" $@.out "generated."
 
 edge_test:
@@ -39,6 +44,10 @@ edge_test:
 
 point_test:
 	$(CC) $(STR)/*.c $(TST)/point_test.c -o $@.out
+	@echo "Executable" $@.out "generated."
+
+tree_test:
+	$(CC) $(STR)/tree.c $(TST)/tree_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
 clean:
