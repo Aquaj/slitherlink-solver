@@ -36,7 +36,7 @@ generator_test:
 	@echo "Executable" $@.out "generated."
 
 parser_test:
-	$(COMPILATION) $(PARSER) $(STR)/*.c $(OUTPUT) -o $@.out
+	$(COMPILATION) $(PARSER) $(STR)/*.c $(OUTPUT) $(TST)/parser_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
 edge_test:
