@@ -5,7 +5,7 @@ OUTPUT=src/output/output.c
 SOLVER=src/solver/*.c
 PARSER=src/parser/parser.c
 TST=src/test
-CFLAGS= -g #-Og -Wall -Wextra -Werror -pedantic-errors -std=c11
+CFLAGS= -g -Og -Wall -Wextra -Werror -pedantic-errors -std=c11
 #DEPS=
 #%.o: %.c $(DEPS)
 #	$(CC) -c -o $@ $< $(CFLAGS)
