@@ -66,7 +66,7 @@ int main(int argc, char ** argv){
   }
 
   if (!strcmp(argv[1], "-g")){
-    int N = 10;
+    int N = 7;
     int M = 10;
 
     if (N<2 || M<2){
@@ -76,7 +76,7 @@ int main(int argc, char ** argv){
     struct map* my_map = map_init(N,M);
     struct grid* my_grid = grid_init(N,M);
 
-    draw_loop(my_map, my_grid);
+    draw_loop(my_map, my_grid, 15);
 
     //removed_square_all_values(my_map, my_grid);
 
