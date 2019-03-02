@@ -7,10 +7,19 @@ before_script:
   - make edge_test
   - make point_test
   - make tree_test
-script:
-  - ./solver_test.out
-  - ./generator_test.out
-  - ./parser_test.out
-  - ./edge_test.out
-  - ./point_test.out
-  - ./tree_test.out
+  - make slitherlink
+jobs:
+  include:
+    - stage: Slitherlink
+      name: "Running Slitherlink - Square"
+      script: ./slitherlink -g
+    - name: "Running Slitherlink - Rectangle"
+      script: ./slitherlink -g 5 7
+    - stage: Tests
+      script:
+        - ./solver_test.out
+        - ./generator_test.out
+        - ./parser_test.out
+        - ./edge_test.out
+        - ./point_test.out
+        - ./tree_test.out
