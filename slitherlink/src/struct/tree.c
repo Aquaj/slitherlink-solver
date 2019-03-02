@@ -17,10 +17,12 @@ void tree_add(struct tree* my_tree, void *data){
   struct node* my_node = node_init(data);
   if(is_tree_empty(my_tree)){
     my_tree->root = my_node;
+    my_tree->root->child = NULL;
   }
   else{
     struct node* leaf_node = tree_leaf(my_tree);
     leaf_node->child = my_node;
+    leaf_node->child->child = NULL;
   }
 }
 
@@ -69,7 +71,7 @@ int is_tree_empty(struct tree* my_tree){
 
 struct node* node_init(void *data){
     struct node* new_node = malloc(sizeof(struct node));
-    new_node = malloc(sizeof(data));
+    new_node->data = malloc(sizeof(data));
     new_node->data = data;
 
     return new_node;

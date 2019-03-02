@@ -29,7 +29,10 @@ int expand_rules(struct map* my_map, struct grid* my_grid){
     }
   }
 
+  /* VERBOSE
   print_grid(my_map, my_grid, 1);
+  */
+
 /*
   printf("Expand Iterations : %d\n", expand_iter);
   printf("Rule Iterations : %d\n", rule_iter);
@@ -57,35 +60,39 @@ void make_suppositions(struct map* my_map, struct grid *my_grid){
 
   int nb_suppositions = 0;
   while(!is_solved(my_map, my_grid)){
-    printf("Make supposition\n");
+    if(!(nb_suppositions%100)){
+      print_grid(my_map, my_grid, 1);
+    }
+    //printf("Make supposition\n");
     while(!make_supposition(my_map, my_grid, supp_tree)){
       nb_suppositions++;
-      printf("Contradiction\n");
+      //printf("Contradiction\n");
       backtrack(my_map, my_grid, supp_tree);
       while(!draw_supposition(my_map, my_grid, supp_tree)){
         nb_suppositions++;
-        printf("Contradiction\n");
+        //printf("Contradiction\n");
         backtrack(my_map, my_grid, supp_tree); // D -> X, X -> Del + Parent X
       }
     }
     nb_suppositions++;
     while(!draw_supposition(my_map, my_grid, supp_tree)){
       nb_suppositions++;
-      printf("Contradiction\n");
+      //printf("Contradiction\n");
       backtrack(my_map, my_grid, supp_tree); // D -> X, X -> Del + Parent X
     }
     while(is_loop_closed(my_map) && !is_one_loop(my_map)){
       nb_suppositions++;
-      printf("Contradiction Loop Compromised\n");
+      //printf("Contradiction Loop Compromised\n");
       backtrack(my_map, my_grid, supp_tree);
       while(!draw_supposition(my_map, my_grid, supp_tree)){
         nb_suppositions++;
-        printf("Contradiction\n");
+        //printf("Contradiction\n");
         backtrack(my_map, my_grid, supp_tree); // D -> X, X -> Del + Parent X
       }
     }
   }
 
+  print_grid(my_map, my_grid, 1);
   printf("Solved in %d iterations\n", nb_suppositions);
 }
 
@@ -145,11 +152,11 @@ int draw_supposition(struct map *my_map, struct grid *my_grid, struct tree *supp
   struct supposition* my_supposition = last_supposition(supp_tree);
 
   if(my_supposition->drawn == 0x01){
-    printf("Point %d %d : %d DRAWN\n", my_supposition->point.x, my_supposition->point.y, my_supposition->ori);
+    //printf("Point %d %d : %d DRAWN\n", my_supposition->point.x, my_supposition->point.y, my_supposition->ori);
     set_drawn_point(my_map, my_supposition->point, my_supposition->ori);
   }
   else{
-    printf("Point %d %d : %d CROSSED\n", my_supposition->point.x, my_supposition->point.y, my_supposition->ori);
+    //printf("Point %d %d : %d CROSSED\n", my_supposition->point.x, my_supposition->point.y, my_supposition->ori);
     set_crossed_point(my_map, my_supposition->point, my_supposition->ori);
   }
 
@@ -263,7 +270,6 @@ struct coord choose_point(struct map* my_map, struct coord parent_point){
     }
   }
 
-  printf("%d %d\n", min_point.x, min_point.y);
   return min_point;
 }
 
@@ -635,19 +641,19 @@ struct coord next_hop(struct map* my_map, struct coord first, enum orientation m
 int is_solved(struct map* my_map, struct grid *my_grid){
   int valid_values = is_valid_values(my_map, my_grid);
   if(!valid_values){
-    printf("Values Not Satisfied\n");
+    //printf("Values Not Satisfied\n");
     return 0;
   }
 
   int closed_loop = is_loop_closed(my_map);
   if(!closed_loop){
-    printf("Loop Not Closed\n");
+    //printf("Loop Not Closed\n");
     return 0;
   }
 
   int one_loop = is_one_loop(my_map);
   if(!one_loop){
-    printf("Loop Compromised\n");
+    //printf("Loop Compromised\n");
     return 0;
   }
 

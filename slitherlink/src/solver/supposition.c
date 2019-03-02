@@ -34,5 +34,6 @@ void supposition_fill(struct supposition *my_supposition, struct coord current_p
 struct supposition *last_supposition(struct tree* my_tree){
   struct node* leaf_node = tree_leaf(my_tree);
   struct supposition *my_supposition = (struct supposition *)leaf_node->data;
+  
   return my_supposition;
 }

@@ -96,7 +96,7 @@ void grid_remove_values(struct grid* my_grid){
   int perc_zeros = 100;
   int perc_ones = 10;
   int perc_twos = 10;
-  int perc_threes = 50;
+  int perc_threes = 100;
 
   for(int i=0; i<my_grid->n; i++){
     for(int j=0; j<my_grid->m; j++){

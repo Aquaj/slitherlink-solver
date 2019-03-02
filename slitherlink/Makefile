@@ -5,7 +5,7 @@ OUTPUT=src/output/output.c
 SOLVER=src/solver/*.c
 PARSER=src/parser/parser.c
 TST=src/test
-#CFLAGS=
+CFLAGS= -g #-Og -Wall -Wextra -Werror -pedantic-errors -std=c11
 #DEPS=
 #%.o: %.c $(DEPS)
 #	$(CC) -c -o $@ $< $(CFLAGS)
@@ -27,7 +27,7 @@ slitherlink:
 	@echo "Executable" $@.out "generated."
 
 solver_test:
-	$(CC) $(GENERATOR) $(PARSER) $(STR)/*.c $(OUTPUT) $(SOLVER) $(TST)/solver_test.c -o $@.out
+	$(CC) $(CFLAGS) $(GENERATOR) $(PARSER) $(STR)/*.c $(OUTPUT) $(SOLVER) $(TST)/solver_test.c -o $@.out
 	@echo "Executable" $@.out "generated."
 
 generator_test:
