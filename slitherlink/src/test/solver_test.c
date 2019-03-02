@@ -15,7 +15,6 @@ int main(){
   struct map* my_map = map_init(n,m);
   struct grid* my_grid = grid_init(n,m);
 
-
   draw_loop(my_map, my_grid, 50);
 
   draw_all_values(my_map, my_grid);

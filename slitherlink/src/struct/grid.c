@@ -88,54 +88,96 @@ void grid_remove_values(struct grid* my_grid){
   int twos = 0;
   int threes = 0;
 
-  int max_zeros = 2;//n*m
-  int max_ones = 2;//n/6;
-  int max_twos = 2;//n/8;
-  int max_threes = 2;//n/4;
+  int nb_zeros = 0;
+  int nb_ones = 0;
+  int nb_twos = 0;
+  int nb_threes = 0;
 
+  int perc_zeros = 100;
+  int perc_ones = 10;
+  int perc_twos = 10;
+  int perc_threes = 50;
 
   for(int i=0; i<my_grid->n; i++){
     for(int j=0; j<my_grid->m; j++){
       switch(my_grid->squares[i][j]){
         case '0':
-          zeros++;
-          if(zeros < max_zeros){
-            my_grid->squares[i][j] = 'N';
-          }
-          else{
-            zeros=0;
-          }
+          nb_zeros++;
         break;
         case '1':
-          ones++;
-          if(ones < max_ones){
-            my_grid->squares[i][j] = 'N';
-          }
-          else{
-            ones = 0;
-          }
+          nb_ones++;
         break;
         case '2':
-          twos++;
-          if(twos < max_twos){
-            my_grid->squares[i][j] = 'N';
-          }
-          else{
-            twos=0;
-          }
+          nb_twos++;
         break;
         case '3':
-          threes++;
-          if(threes < max_threes){
-            my_grid->squares[i][j] = 'N';
-          }
-          else{
-            threes=0;
-          }
+          nb_threes++;
         break;
         default:
           assert(NULL);
         break;
+      }
+    }
+  }
+
+  zeros = nb_zeros * perc_zeros / 100;
+  ones = nb_ones * perc_ones / 100;
+  twos = nb_twos * perc_twos / 100;
+  threes = nb_threes * perc_threes / 100;
+
+
+  int zeros_rem = 0;
+  int ones_rem = 0;
+  int twos_rem = 0;
+  int threes_rem = 0;
+
+  int enc_zeros = 0;
+  int enc_ones = 0;
+  int enc_twos = 0;
+  int enc_threes = 0;
+
+  while(zeros_rem < zeros || ones_rem < ones || twos_rem < twos || threes_rem < threes){
+    for(int i=0; i<my_grid->n; i++){
+      for(int j=0; j<my_grid->m; j++){
+        switch(my_grid->squares[i][j]){
+          case '0':
+            enc_zeros++;
+            if(enc_zeros == 5 && zeros_rem < zeros){
+              my_grid->squares[i][j] = 'N';
+              enc_zeros = 0;
+              zeros_rem++;
+            }
+          break;
+          case '1':
+            enc_ones++;
+            if(enc_ones == 5 && ones_rem < ones){
+              my_grid->squares[i][j] = 'N';
+              enc_ones = 0;
+              ones_rem++;
+            }
+          break;
+          case '2':
+            enc_twos++;
+            if(enc_twos == 5 && twos_rem < twos){
+              my_grid->squares[i][j] = 'N';
+              enc_twos = 0;
+              twos_rem++;
+            }
+          break;
+          case '3':
+            enc_threes++;
+            if(enc_threes == 5 && threes_rem < threes){
+              my_grid->squares[i][j] = 'N';
+              enc_threes = 0;
+              threes_rem++;
+            }
+          break;
+          case 'N':
+          break;
+          default:
+            assert(NULL);
+          break;
+        }
       }
     }
   }

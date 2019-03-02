@@ -5,7 +5,7 @@ struct grid* parse(){
   enum q_state state = Q0;
   int n = 0, m = 0;
 
-  FILE *file = fopen("src/test/slithers/slither_lvl112.txt", "r");
+  FILE *file = fopen("src/test/slithers/tst.txt", "r");
 
   if (file != NULL)
     {
