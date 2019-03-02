@@ -12,9 +12,9 @@ jobs:
   include:
     - stage: Slitherlink
       name: "Running Slitherlink - Square"
-      script: ./slitherlink -g
+      script: ./slitherlink.out -g
     - name: "Running Slitherlink - Rectangle"
-      script: ./slitherlink -g 5 7
+      script: ./slitherlink.out -g 5 7
     - stage: Tests
       script:
         - ./solver_test.out
