@@ -2,9 +2,15 @@ language: C
 compiler: gcc
 before_script:
   - make solver_test
-  - make edge_test
   - make generator_test
+  - make parser_test
+  - make edge_test
+  - make point_test
+  - make tree_test
 script:
   - ./solver_test.out
-  - ./edge_test.out
   - ./generator_test.out
+  - ./parser_test.out
+  - ./edge_test.out
+  - ./point_test.out
+  - ./tree_test.out
