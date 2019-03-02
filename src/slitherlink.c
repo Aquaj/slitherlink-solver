@@ -66,8 +66,16 @@ int main(int argc, char ** argv){
   }
 
   if (!strcmp(argv[1], "-g")){
-    int N = 7;
-    int M = 10;
+    int N;
+    int M;
+    if (argc > 2) {
+      N = atoi(argv[2]);
+      M = atoi(argv[3]);
+    } else {
+      N = 10;
+      M = 10;
+    }
+
 
     if (N<2 || M<2){
       printf("The size of the grid must be over 1x1.\n");
