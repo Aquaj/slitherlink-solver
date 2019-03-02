@@ -1,0 +1,9 @@
+compiler: gcc
+before_script:
+  - make solver_test
+  - make edge_test
+  - make generator_test
+script:
+  - ./solver_test.out
+  - ./edge_test.out
+  - ./generator_test.out
