@@ -18,7 +18,7 @@ default:
 	@echo "Avalaible options :"
 	@echo "make slitherlink -> generates main executable."
 	@echo "make test -> generates all tests avalaible."
-	@echo "make <name_test> -> generates name_test test. (Avalaible : solver_test, generator_test, edge_test)"
+	@echo "make <name_test> -> generates name_test test. (Available : solver_test, generator_test, parser_test, edge_test, point_test, tree_test)"
 
 test: solver_test generator_test edge_test
 	@echo "Generated all tests' executables."
